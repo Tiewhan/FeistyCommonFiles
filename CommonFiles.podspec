@@ -30,7 +30,7 @@ TODO: Add long description of the pod here.
 
   s.ios.deployment_target = '12.0'
 
-  s.source_files = 'CommonFiles/*.swift'
+  s.source_files = 'CommonFiles/Source/*.swift'
   
   # s.resource_bundles = {
   #   'CommonFiles' => ['CommonFiles/Assets/*.png']
