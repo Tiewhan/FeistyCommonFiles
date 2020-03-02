@@ -1,10 +1,5 @@
 # CommonFiles
-
-[![CI Status](https://img.shields.io/travis/Tiewhan Smith/CommonFiles.svg?style=flat)](https://travis-ci.org/Tiewhan Smith/CommonFiles)
-[![Version](https://img.shields.io/cocoapods/v/CommonFiles.svg?style=flat)](https://cocoapods.org/pods/CommonFiles)
-[![License](https://img.shields.io/cocoapods/l/CommonFiles.svg?style=flat)](https://cocoapods.org/pods/CommonFiles)
-[![Platform](https://img.shields.io/cocoapods/p/CommonFiles.svg?style=flat)](https://cocoapods.org/pods/CommonFiles)
-
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/392ba5b1d20a4fc2847bd409f296a61c)](https://www.codacy.com/manual/Tiewhan/FeistyCommonFiles?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Tiewhan/FeistyCommonFiles&amp;utm_campaign=Badge_Grade)
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
