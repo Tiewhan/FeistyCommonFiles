@@ -13,10 +13,6 @@ public class GameManager {
   public var gameList: [Game] = []
   private var observers: [String: GameManagerObserver] = [:]
 
-  //TODO: Use these variables in the creation of the loader cache thingie mibob
-//  var currentGameListSection: ArraySlice<Game> = ArraySlice<Game>()
-//  var previousGameListSection: ArraySlice<Game> = ArraySlice<Game>()
-//  var nextGameListSection: ArraySlice<Game> = ArraySlice<Game>()
   init() {
 
     let apiManager: APIManager = APIManager()
@@ -131,7 +127,7 @@ public class GameManager {
    - Parameter observerID: The unique ID that is needed to identify the observer
    */
   public func subscribeToGameManager(subscriber observer: GameManagerObserver,
-                              subscriberID observerID: String) {
+                                     subscriberID observerID: String) {
     observers[observerID] = observer
   }
 
