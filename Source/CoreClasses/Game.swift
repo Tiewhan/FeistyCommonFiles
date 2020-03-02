@@ -12,31 +12,12 @@ public class Game {
 
   public var appID: String
   public var name: String
-  private var corePrice: Double?
-  
-  // MARK: All properties (Except appID and name) need to be set to null by the reduce memory load
-  // MARK: method
-  var price: Double {
-  
-    get {
-  
-      if let corePrice = corePrice {
-        return corePrice
-      }
-  
-        return 0.0
-    }
-  
-    set {
-       corePrice = newValue
-     }
-  
-  }
+  public var price: Double = 0.00
 
   public init(gameName name: String, gamePrice price: Double) {
 
     self.name = name
-    corePrice = price
+    self.price = price
     appID = ""
 
   }
@@ -53,7 +34,7 @@ public class Game {
   }
 
   public func reduceMemoryLoad() {
-    corePrice = nil
+
   }
 
 }
