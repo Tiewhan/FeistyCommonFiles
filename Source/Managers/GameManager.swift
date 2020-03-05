@@ -46,14 +46,14 @@ public class GameManager {
     
     let url: URL = URL(string: SteamURLComponents.gameListURL)!
     
-    // MARK: Call Failed Closure
+    // MARK: - Call Failed Closure
     serviceCaller.callFailed = { error in
       
     }
     
-    // MARK: ----------------------------
+    // MARK: - ---------------------------
 
-    // MARK: Call Succeeded Closure
+    // MARK: - Call Succeeded Closure
     serviceCaller.callSucceeded = { [weak self] data, _ in
 
       guard let self = self else {
@@ -81,7 +81,7 @@ public class GameManager {
 
     }
     
-    // MARK: ----------------------------
+    // MARK: - ---------------------------
     
     serviceCaller.makeServiceCall(with: url, and: DataBundle())
     
@@ -103,7 +103,7 @@ public class GameManager {
     
   }
   
-  private func decodeGameDetails(using data: Data,basedOn game: Game) {
+  private func decodeGameDetails(using data: Data, basedOn game: Game) {
     
     do {
 
@@ -146,8 +146,8 @@ public class GameManager {
         let dataBundle = DataBundle()
         dataBundle.extraData["game"] = game
         
-        // MARK: Call Succeeded Closure
-        serviceCaller.callSucceeded = { [weak self] data,dataBundle in
+        // MARK: - Call Succeeded Closure
+        serviceCaller.callSucceeded = { [weak self] data, dataBundle in
           
           guard let game = dataBundle.extraData["game"] as? Game else {
             return
@@ -161,14 +161,14 @@ public class GameManager {
           
         }
         
-        // MARK: ----------------------------
+        // MARK: - ---------------------------
 
-        // MARK: Call Failed Closure
+        // MARK: - Call Failed Closure
         serviceCaller.callFailed = { error in
           
         }
         
-        // MARK: ----------------------------
+        // MARK: - ---------------------------
 
         dispatchGroup.leave()
 
