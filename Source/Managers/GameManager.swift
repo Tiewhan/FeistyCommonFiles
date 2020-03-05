@@ -8,6 +8,22 @@
 
 import Foundation
 
+///Structure is only used to model JSON respones. Contains the a structure of Apps
+struct AppList: Codable {
+  let applist: Apps
+}
+
+///Structure is used to model JSON respones. Contains the list of games
+struct Apps: Codable {
+  let apps: [JsonGame]
+}
+
+///Structure is used to model JSON respones. This is the actual game
+struct JsonGame: Codable {
+  let appid: Int
+  let name: String
+}
+
 public class GameManager {
 
   public var gameList: [Game] = []
@@ -28,9 +44,27 @@ public class GameManager {
    */
   private func loadMainList(using apiManager: APIManager) {
 
-    apiManager.getGames { [weak self] (games) in
+    let serviceCaller = ServiceCaller()
+    
+    let url: URL = URL(string: SteamURLComponents.gameListURL)!
+    
+    // MARK: Call Failed Closure
+    serviceCaller.callFailed = { error in
+      
+    }
+    
+    // MARK: ----------------------------
 
-    var smallGameList: [Game] = []
+    // MARK: Call Succeeded Closure
+    serviceCaller.callSucceeded = { [weak self] data, _ in
+
+      guard let self = self else {
+        return
+      }
+
+      let games = self.decodeGames(data: data)
+
+      var smallGameList: [Game] = []
 
       //This limit exists until sectioning with the table works.
       let size: Int = games.count >= 25 ? 25 : games.count
@@ -41,10 +75,6 @@ public class GameManager {
           smallGameList.append(games[index])
         }
 
-        guard let self = self else {
-          return
-        }
-
         self.gameList = smallGameList
 
         self.getGameDetails(of: self.gameList, using: apiManager)
@@ -52,9 +82,48 @@ public class GameManager {
       }
 
     }
-
+    
+    // MARK: ----------------------------
+    
+    serviceCaller.makeServiceCall(with: url, and: DataBundle())
+    
   }
+  
+  private func decodeGames(data: Data) -> [Game] {
+    
+    var games: [Game] = []
+    
+    if let decodedGames = try? JSONDecoder().decode(AppList.self, from: data) {
 
+      decodedGames.applist.apps.forEach { (jsonGame) in
+        games.append(Game(appid: "\(jsonGame.appid)", name: jsonGame.name))
+      }
+
+    }
+    
+    return games
+    
+  }
+  
+  private func decodeSingleGame(data: Data, game: Game) {
+    
+    do {
+
+      //Wanted data is wrapped in extra keys. This unwraps its.
+      let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
+      let jsonWrapper = json as? [String: Any]
+      let mainResponseBody = jsonWrapper?[game.appID] as? [String: Any]
+
+      if let mainResponseBody = mainResponseBody {
+        self.extractGameData(detailsWrapper: mainResponseBody, game: game)
+      }
+
+    } catch let err {
+      print(err)
+    }
+    
+  }
+  
   /**
    Uses an operation queue and dispatch group to retrieve the game details of all the elements in the given array
    
@@ -68,34 +137,48 @@ public class GameManager {
    */
   private func getGameDetails(of games: [Game], using apiManager: APIManager) {
 
-    let detailOperationQueue = OperationQueue()
-
-    let detailsOperation = BlockOperation {
-
       let dispatchGroup = DispatchGroup()
 
       games.forEach { game in
 
         dispatchGroup.enter()
-        apiManager.getGameDetails(of: game, completionHandler: self.extractGameData(detailsWrapper:game:))
+        
+        let serviceCaller = ServiceCaller()
+        
+        let dataBundle = DataBundle()
+        dataBundle.extraData["game"] = game
+        
+        // MARK: Call Succeeded Closure
+        serviceCaller.callSucceeded = { [weak self] data,dataBundle in
+          
+          guard let game = dataBundle.extraData["game"] as? Game else {
+            return
+          }
+          
+          guard let self = self else {
+            return
+          }
+          
+          self.decodeSingleGame(data: data, game: game)
+          
+        }
+        
+        // MARK: ----------------------------
+
+        // MARK: Call Failed Closure
+        serviceCaller.callFailed = { error in
+          
+        }
+        
+        // MARK: ----------------------------
+
         dispatchGroup.leave()
 
       }
 
       dispatchGroup.wait()
 
-    }
-
-    let notifyOperation = BlockOperation {
-
-      self.notifyAllObservers()
-
-    }
-
-    notifyOperation.addDependency(detailsOperation)
-
-    detailOperationQueue.addOperation(detailsOperation)
-    detailOperationQueue.addOperation(notifyOperation)
+      notifyAllObservers()
 
   }
 

@@ -8,22 +8,6 @@
 
 import Foundation
 
-///Structure is only used to model JSON respones. Contains the a structure of Apps
-private struct AppList: Codable {
-  let applist: Apps
-}
-
-///Structure is used to model JSON respones. Contains the list of games
-private struct Apps: Codable {
-  let apps: [JsonGame]
-}
-
-///Structure is used to model JSON respones. This is the actual game
-public struct JsonGame: Codable {
-  let appid: Int
-  let name: String
-}
-
 ///Handles the calling of API services and also handles the decoding thereof.
 public struct APIManager {
 

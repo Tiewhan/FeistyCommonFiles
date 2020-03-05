@@ -13,32 +13,33 @@ public enum ServiceCallError: Error {
   case malformedRequest
 }
 
-public struct ServiceCaller {
+public class ServiceCaller {
   
-  public func makeServiceCall(with url: URL,
-                              callSucceeded: @escaping((Data) -> Void),
-                              callFailed: @escaping((ServiceCallError) -> Void)) {
+  public var callSucceeded: ((Data, DataBundle) -> Void)?
+  public var callFailed: ((ServiceCallError) -> Void)?
+  
+  public func makeServiceCall(with url: URL, and dataBundle: DataBundle) {
     
     let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
 
       if error != nil {
         
-        callFailed(.generalError)
+        self.callFailed?(.generalError)
         return
         
       }
 
       guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
         
-        callFailed(.malformedRequest)
+        self.callFailed?(.malformedRequest)
         return
         
       }
 
       if let data = data {
-        callSucceeded(data)
+        self.callSucceeded?(data, dataBundle)
       } else {
-        callFailed(.noDataAvailable)
+        self.callFailed?(.noDataAvailable)
       }
       
     }
