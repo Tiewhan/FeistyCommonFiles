@@ -103,7 +103,7 @@ public class GameManager {
     
   }
   
-  private func decodeSingleGame(data: Data, game: Game) {
+  private func decodeGameDetails(using data: Data,basedOn game: Game) {
     
     do {
 
@@ -157,7 +157,7 @@ public class GameManager {
             return
           }
           
-          self.decodeSingleGame(data: data, game: game)
+          self.decodeGameDetails(using: data, basedOn: game)
           
         }
         
