@@ -31,9 +31,7 @@ public class GameManager {
 
   init() {
 
-    let apiManager: APIManager = APIManager()
-
-    loadMainList(using: apiManager)
+    loadMainList()
 
   }
 
@@ -42,7 +40,7 @@ public class GameManager {
    
    - Parameter apiManager: An instance of an API manager
    */
-  private func loadMainList(using apiManager: APIManager) {
+  private func loadMainList() {
 
     let serviceCaller = ServiceCaller()
     
@@ -77,7 +75,7 @@ public class GameManager {
 
         self.gameList = smallGameList
 
-        self.getGameDetails(of: self.gameList, using: apiManager)
+        self.getGameDetails(of: self.gameList)
 
       }
 
@@ -135,7 +133,7 @@ public class GameManager {
    - Parameter games: The list of games that the details need to be found
    - Parameter apiManager: The manager to use for the calls
    */
-  private func getGameDetails(of games: [Game], using apiManager: APIManager) {
+  private func getGameDetails(of games: [Game]) {
 
       let dispatchGroup = DispatchGroup()
 
