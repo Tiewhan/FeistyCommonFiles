@@ -24,10 +24,10 @@ struct JsonGame: Codable {
   let name: String
 }
 
-public class GameManager {
+public class GameRepo {
 
   public var gameList: [Game] = []
-  private var observers: [String: GameManagerObserver] = [:]
+  private var observers: [String: GameRepoObserver] = [:]
   private var serviceCaller: ServiceCaller
 
   init(with serviceCaller: ServiceCaller = ServiceCaller()) {
@@ -45,7 +45,7 @@ public class GameManager {
    */
   private func loadMainList() {
 
-    let serviceCaller = ServiceCaller()
+    serviceCaller.resetCaller()
     
     let url: URL = URL(string: SteamURLComponents.gameListURL)!
     
@@ -148,7 +148,7 @@ public class GameManager {
 
         dispatchGroup.enter()
         
-        let serviceCaller = ServiceCaller()
+        serviceCaller.resetCaller()
         
         let dataBundle = DataBundle()
         dataBundle.extraData["game"] = game
@@ -176,7 +176,16 @@ public class GameManager {
         }
         
         // MARK: - ---------------------------
-
+        
+        let urlString = "\(SteamURLComponents.specificGameURL)\(game.appID)"
+        let url: URL = URL(string: urlString)!
+        
+        do {
+          try serviceCaller.makeServiceCall(with: url, and: dataBundle)
+        } catch {
+          fatalError("Service call not set up properly")
+        }
+        
         dispatchGroup.leave()
 
       }
@@ -214,7 +223,7 @@ public class GameManager {
    - Parameter observer: The class/struct that conforms to the GameManagerObserver protocol
    - Parameter observerID: The unique ID that is needed to identify the observer
    */
-  public func subscribeToGameManager(subscriber observer: GameManagerObserver,
+  public func subscribeToGameRepo(subscriber observer: GameRepoObserver,
                                      subscriberID observerID: String) {
     observers[observerID] = observer
   }
@@ -224,7 +233,7 @@ public class GameManager {
    
    - Parameter observerID: The ID of the observer to remove from the list
    */
-  public func unsubscribeFromGameManager(subscriberID observerID: String) {
+  public func unsubscribeFromGameRepo(subscriberID observerID: String) {
     observers.removeValue(forKey: observerID)
   }
 

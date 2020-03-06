@@ -13,7 +13,7 @@ public class GameDataViewModel {
   
   public var observerID: String = "GameDataViewModelSubscriber"
   private weak var view: GameDataLoadedType?
-  private var gameManager: GameManager?
+  private var gameRepo: GameRepo?
   
   public init(_ view: GameDataLoadedType) {
     self.view = view
@@ -26,8 +26,8 @@ public class GameDataViewModel {
     
     let gameModel = GameModel()
     
-    gameManager = gameModel.getGameManager()
-    gameManager?.subscribeToGameManager(subscriber: self, subscriberID: observerID)
+    gameRepo = gameModel.getGameManager()
+    gameRepo?.subscribeToGameRepo(subscriber: self, subscriberID: observerID)
     
   }
   
@@ -41,7 +41,7 @@ public class GameDataViewModel {
    */
   public func getGameDetails(at index: Int) -> (name: String, gamePrice: String) {
     
-    if let game = gameManager?.gameList[index] {
+    if let game = gameRepo?.gameList[index] {
       return (game.name, "R\(game.price)")
     }
     
@@ -55,7 +55,7 @@ public class GameDataViewModel {
    */
   public func getPageCount() -> Int {
     
-    if let count = gameManager?.gameList.count {
+    if let count = gameRepo?.gameList.count {
       return count
     }
     
@@ -73,7 +73,7 @@ public class GameDataViewModel {
    */
   public func getGameAt(at index: Int) -> Game {
     
-    if let game = gameManager?.gameList[index] {
+    if let game = gameRepo?.gameList[index] {
       return game
     }
     
@@ -83,11 +83,11 @@ public class GameDataViewModel {
 }
 
 ///Extends the View Model with the GameManagerObserver to react to games finished being loaded
-extension GameDataViewModel: GameManagerObserver {
+extension GameDataViewModel: GameRepoObserver {
   
   public func gamesFinishedLoading() {
     
-    if let gameList = gameManager?.gameList {
+    if let gameList = gameRepo?.gameList {
       view?.gameDataSuccessfullyLoaded(with: gameList)
     }
     

@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol GameManagerObserver {
+public protocol GameRepoObserver {
     var observerID: String { get set }
     func gamesFinishedLoading()
 }

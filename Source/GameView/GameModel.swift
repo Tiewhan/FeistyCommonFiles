@@ -11,8 +11,8 @@ import Foundation
 ///The GameModel class retrieves data when asked by the View Model
 public class GameModel {
   
-  public func getGameManager() -> GameManager {
-    return GameManager()
+  public func getGameManager() -> GameRepo {
+    return GameRepo()
   }
   
 }
