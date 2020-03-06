@@ -28,9 +28,12 @@ public class GameManager {
 
   public var gameList: [Game] = []
   private var observers: [String: GameManagerObserver] = [:]
+  private var serviceCaller: ServiceCaller
 
-  init() {
+  init(with serviceCaller: ServiceCaller = ServiceCaller()) {
 
+    self.serviceCaller = serviceCaller
+    
     loadMainList()
 
   }
