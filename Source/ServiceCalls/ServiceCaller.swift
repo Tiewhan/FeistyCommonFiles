@@ -13,12 +13,19 @@ public enum ServiceCallError: Error {
   case malformedRequest
 }
 
+public enum SerivceCallerSetupError: Error {
+  case noCallSucceededCallback
+  case noCallFailedCallback
+}
+
 public class ServiceCaller {
   
   public var callSucceeded: ((Data, DataBundle) -> Void)?
   public var callFailed: ((ServiceCallError) -> Void)?
   
-  public func makeServiceCall(with url: URL, and dataBundle: DataBundle) {
+  public func makeServiceCall(with url: URL, and dataBundle: DataBundle) throws {
+    
+    try checkIfCallerIsSetUp()
     
     let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
 
@@ -46,6 +53,25 @@ public class ServiceCaller {
     
     task.resume()
       
+  }
+  
+  private func checkIfCallerIsSetUp() throws {
+    
+    guard callSucceeded != nil else {
+      throw SerivceCallerSetupError.noCallSucceededCallback
+    }
+    
+    guard callFailed != nil else {
+      throw SerivceCallerSetupError.noCallFailedCallback
+    }
+    
+  }
+  
+  public func resetCaller() {
+    
+    callSucceeded = nil
+    callFailed = nil
+    
   }
   
 }
