@@ -13,21 +13,14 @@ public class GameDataViewModel {
   
   public var observerID: String = "GameDataViewModelSubscriber"
   private weak var view: GameDataLoadedType?
-  private var gameManager: GameManager?
+  private var model: GameModelProtocol
   
-  public init(_ view: GameDataLoadedType) {
+  public init(_ view: GameDataLoadedType, with model: GameModelProtocol) {
     self.view = view
-  }
-  
-  /**
-   Invoked by the view when the view has finished loading and can recieve data
-   */
-  public func viewFinishedLoading() {
+    self.model = model
     
-    let gameModel = GameModel()
-    
-    gameManager = gameModel.getGameManager()
-    gameManager?.subscribeToGameManager(subscriber: self, subscriberID: observerID)
+    model.subscribeToGameModelGamesLoaded(subscriber: self, subscriberID: observerID)
+    model.loadData()
     
   }
   
@@ -39,13 +32,18 @@ public class GameDataViewModel {
    
    - Returns: A tuple of the necessary details for the view to display.
    */
-  public func getGameDetails(at index: Int) -> (name: String, gamePrice: String) {
+  public func getGameDetails(at index: Int) -> (gameName: String, gamePrice: String) {
     
-    if let game = gameManager?.gameList[index] {
-      return (game.name, "R\(game.price)")
-    }
+    let game = model.getGameAt(index: index)
     
-    return ("No Name", "No price")
+    let gameDetails = (gameName: game.name, gamePrice: "R\(game.price)")
+    
+    return gameDetails
+    
+  }
+  
+  public func getGameAt(at index: Int) -> Game {
+    return model.getGameAt(index: index)
   }
   
   /**
@@ -55,41 +53,18 @@ public class GameDataViewModel {
    */
   public func getPageCount() -> Int {
     
-    if let count = gameManager?.gameList.count {
-      return count
-    }
+    return model.getPageCount()
     
-    return 0
-    
-  }
-  
-  /**
-   Gets the game that corresponds to the given index for use by the View.
-   
-   - Parameter index: The index of the game.
-                      This index matches the index of the row position on the view on not the data source
-   
-   - Returns: A game if found. Otherwise a blank game
-   */
-  public func getGameAt(at index: Int) -> Game {
-    
-    if let game = gameManager?.gameList[index] {
-      return game
-    }
-    
-    return Game(appid: "NO ID", name: "No Name")
   }
   
 }
 
 ///Extends the View Model with the GameManagerObserver to react to games finished being loaded
-extension GameDataViewModel: GameManagerObserver {
+extension GameDataViewModel: GameModelObserver {
   
   public func gamesFinishedLoading() {
     
-    if let gameList = gameManager?.gameList {
-      view?.gameDataSuccessfullyLoaded(with: gameList)
-    }
+    view?.gameDataSuccessfullyLoaded(with: model.gameList)
     
   }
   
