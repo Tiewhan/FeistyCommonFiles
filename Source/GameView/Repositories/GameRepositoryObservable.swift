@@ -10,7 +10,7 @@ import Foundation
 public protocol GameRepositoryObservable {
   
   func subscribeToGameRepoGamesLoaded(subscriber observer: GameRepositoryObserver,
-                                     subscriberID observerID: String)
+                                      subscriberID observerID: String)
 
   func unsubscribeFromGameRepoGamesLoaded(subscriberID observerID: String)
   

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol GameModelProtocol : GameModelObservable {
+public protocol GameModelProtocol: GameModelObservable {
   
   var gameList: [Game] { get set }
   
@@ -18,5 +18,3 @@ public protocol GameModelProtocol : GameModelObservable {
   func getPageCount() -> Int
   
 }
-
-

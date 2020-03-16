@@ -58,7 +58,7 @@ extension GameModel: GameModelProtocol {
   }
   
   public func subscribeToGameModelGamesLoaded(subscriber observer: GameModelObserver,
-                                     subscriberID observerID: String) {
+                                              subscriberID observerID: String) {
     observers[observerID] = observer
   }
 

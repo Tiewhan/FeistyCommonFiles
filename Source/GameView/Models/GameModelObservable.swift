@@ -10,7 +10,7 @@ import Foundation
 public protocol GameModelObservable {
   
   func subscribeToGameModelGamesLoaded(subscriber observer: GameModelObserver,
-                                     subscriberID observerID: String)
+                                       subscriberID observerID: String)
 
   func unsubscribeFromGameModelGamesLoaded(subscriberID observerID: String)
 

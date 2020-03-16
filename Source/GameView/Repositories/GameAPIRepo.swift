@@ -102,7 +102,6 @@ public class GameAPIRepo: GameRepository {
         
        self.decodeGameDetails(using: data, basedOn: game)
         
-        
       }
       
       // MARK: - ---------------------------
@@ -149,7 +148,7 @@ public class GameAPIRepo: GameRepository {
     
   }
   
-  private func extractGameData(detailsWrapper: [String: Any], game: Game){
+  private func extractGameData(detailsWrapper: [String: Any], game: Game) {
 
     guard let gameDetailsData = detailsWrapper["data"] as? [String: Any] else {
       return
@@ -182,7 +181,8 @@ public class GameAPIRepo: GameRepository {
     
   }
   
-  public func subscribeToGameRepoGamesLoaded(subscriber observer: GameRepositoryObserver, subscriberID observerID: String) {
+  public func subscribeToGameRepoGamesLoaded(subscriber observer: GameRepositoryObserver,
+                                             subscriberID observerID: String) {
     observers[observerID] = observer
   }
   
