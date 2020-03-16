@@ -83,7 +83,11 @@ public class GameManager {
     
     // MARK: - ---------------------------
     
-    serviceCaller.makeServiceCall(with: url, and: DataBundle())
+    do {
+      try serviceCaller.makeServiceCall(with: url, and: DataBundle())
+    } catch {
+      fatalError("Service call not set up properly")
+    }
     
   }
   
