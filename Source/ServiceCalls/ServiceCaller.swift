@@ -7,13 +7,13 @@
 
 import Foundation
 
-public enum ServiceCallError: Error {
+public enum ServiceCallError: Error, Equatable {
   case noDataAvailable
   case generalError
   case malformedRequest
 }
 
-public enum SerivceCallerSetupError: Error {
+public enum SerivceCallerSetupError: Error, Equatable {
   case noCallSucceededCallback
   case noCallFailedCallback
 }
