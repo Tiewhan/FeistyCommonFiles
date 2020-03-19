@@ -9,12 +9,14 @@
 import Foundation
 
 ///A view model that represents the view and provides a way for the view to get data
-public class GameDetailsViewModel {
+public class GameDetailsViewModelSwift {
   
   private weak var view: GameDetailsLoadedType?
   private var game: Game
   
   public init(_ view: GameDetailsLoadedType, game: Game?) {
+    
+    let test = GameDetailsViewModel()
     
     self.view = view
 

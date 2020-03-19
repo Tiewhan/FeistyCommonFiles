@@ -8,7 +8,7 @@
 import Foundation
 
 ///Represents a digital game.
-public class Game {
+public class Game: NSObject {
 
   public var appID: String
   public var name: String

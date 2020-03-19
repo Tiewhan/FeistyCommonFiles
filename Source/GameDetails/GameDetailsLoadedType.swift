@@ -7,6 +7,6 @@
 //
 
 import Foundation
-public protocol  GameDetailsLoadedType: AnyObject {
+public protocol  GameDetailsLoadedTypeSwift: AnyObject {
   func gameDetailsFound(gameDetails: (gameName: String, appID: String))
 }
