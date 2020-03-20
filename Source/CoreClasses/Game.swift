@@ -10,19 +10,21 @@ import Foundation
 ///Represents a digital game.
 public class Game: NSObject {
 
-  public var appID: String
-  public var name: String
-  public var price: Double = 0.00
+  @objc public var appID: String
+  @objc public var name: String
+  @objc public var price: Double = 0.00
 
-  public init(gameName name: String, gamePrice price: Double) {
+  @objc public init(gameName name: String, gamePrice price: Double) {
 
     self.name = name
     self.price = price
     appID = ""
+    
+    super.init()
 
   }
 
-  public init(appid: String, name: String) {
+  @objc public init(appid: String, name: String) {
 
     appID = "\(appid)"
     self.name = name

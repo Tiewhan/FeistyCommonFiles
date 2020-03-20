@@ -11,12 +11,15 @@
 
 @implementation GameDetailsViewModel
 
--(instancetype) initWith:(id<GameDetailsLoadedType>)view {
+-(instancetype) initWith:(id<GameDetailsLoadedType>)view
+                        : (Game *) selectedGame;
+{
   
   self = [super init];
   
   if (self) {
     self.view = view;
+    self.selectedGame = selectedGame;
   }
   
   return self;
@@ -24,6 +27,11 @@
 }
 
 - (void)getGameData {
+  
+  NSString* gameName = self.selectedGame.name;
+  NSString* appID = self.selectedGame.appID;
+  
+  [self.view gameDetailsFound:gameName :appID];
   
 }
 
