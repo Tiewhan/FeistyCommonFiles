@@ -32,15 +32,15 @@
   NSString* appID = self.selectedGame.appID;
   NSString* price = [NSString stringWithFormat:@"%f", self.selectedGame.price];
   NSString* shortDescription = self.selectedGame.shortDescription;
-  NSString* developers = @"";
+  NSString* developers = @"";   
   NSString* publishers = @"";
   
-  for (int i = 0; i <= self.selectedGame.developers.count; i++) {
-    developers = [developers stringByAppendingString:self.selectedGame.developers[i]];
+  for (id developer in self.selectedGame.developers) {
+    developers = [developers stringByAppendingString:developer];
   }
   
-  for (int i = 0; i <= self.selectedGame.publishers.count; i++) {
-    publishers = [publishers stringByAppendingString:self.selectedGame.publishers[i]];
+  for (id publisher in self.selectedGame.publishers) {
+    publishers = [publishers stringByAppendingString:publisher];
   }
   
   [self.view gameDetailsFound:gameName :appID :price :shortDescription :developers :publishers];
