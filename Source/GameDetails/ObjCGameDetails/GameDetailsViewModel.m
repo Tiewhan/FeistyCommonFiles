@@ -30,7 +30,7 @@
   
   NSString* gameName = self.selectedGame.name;
   NSString* appID = self.selectedGame.appID;
-  NSString* price = [NSString stringWithFormat:@"%f", self.selectedGame.price];
+  NSString* price = [NSString stringWithFormat:@"R%.2f", self.selectedGame.price];
   NSString* shortDescription = self.selectedGame.shortDescription;
   NSString* developers = @"";   
   NSString* publishers = @"";
