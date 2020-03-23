@@ -39,12 +39,14 @@ public class Game: NSObject {
     return name
   }
   
-  public static func defaultValue() {
+  public static func defaultValue() -> Game {
     
     let game = Game(appid: "N/A", name: "No Game")
     game.price = 0.00
     game.developers.append("No Developers")
     game.publishers.append("No Publishers")
+    
+    return game
     
   }
 

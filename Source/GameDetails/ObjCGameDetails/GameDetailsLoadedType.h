@@ -11,7 +11,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol GameDetailsLoadedType <NSObject>
 -(void) gameDetailsFound: (NSString *) withGameName
-                        : (NSString *) andAppID;
+                        : (NSString *) andAppID
+                        : (NSString *) price
+                        : (NSString *) shortDescription
+                        : (NSString *) developers
+                        : (NSString *) publishers;
 @end
 
 NS_ASSUME_NONNULL_END
