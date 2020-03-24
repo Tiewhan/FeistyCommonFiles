@@ -78,6 +78,7 @@ public class GameAPIRepo: GameRepository {
     
   }
   
+  //TODO: Replace gameList with individual game and make the model call the function many times.
   public func getGameDetails(of gameList: [Game], with serviceCaller: ServiceCaller) {
     
     let dispatchGroup = DispatchGroup()
@@ -154,11 +155,21 @@ public class GameAPIRepo: GameRepository {
       return
     }
 
-    guard let priceOverview = gameDetailsData["price_overview"] as? [String: Any] else {
-      return
+    if let priceOverview = gameDetailsData["price_overview"] as? [String: Any] {
+      game.price = Double((priceOverview["final"] as? Int ?? 0)/100)
     }
-
-    game.price = Double((priceOverview["final"] as? Int ?? 0)/100)
+    
+    if let shortDescription = gameDetailsData["short_description"] as? String {
+      game.shortDescription = shortDescription
+    }
+    
+    if let developers = gameDetailsData["developers"] as? Array<String> {
+      game.developers = developers
+    }
+    
+    if let publishers = gameDetailsData["publishers"] as? Array<String> {
+      game.publishers = publishers
+    }
     
   }
   
