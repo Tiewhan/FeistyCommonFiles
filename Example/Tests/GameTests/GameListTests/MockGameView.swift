@@ -7,7 +7,6 @@
 //
 
 import Foundation
-@testable import Feisty
 @testable import CommonFiles
 
 class MockGameView: GameDataLoadedType {

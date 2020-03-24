@@ -8,7 +8,6 @@
 
 import XCTest
 import OHHTTPStubs
-@testable import Feisty
 @testable import CommonFiles
 
 class ServiceCallerTest: XCTestCase {

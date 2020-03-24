@@ -7,7 +7,6 @@
 //
 
 import XCTest
-@testable import Feisty
 @testable import CommonFiles
 
 class MockGameModel: GameModelProtocol {
@@ -29,11 +28,11 @@ class MockGameModel: GameModelProtocol {
   func getGameAt(index: Int) -> Game {
     
     if index >= gameList.count {
-      return Game(appid: "N/A", name: "No Game")
+      return Game.defaultValue
     }
     
     if index <= -1 {
-      return Game(appid: "N/A", name: "No Game")
+      return Game.defaultValue
     }
     
     return gameList[index]

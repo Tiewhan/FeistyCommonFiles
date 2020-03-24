@@ -7,7 +7,6 @@
 //
 
 import XCTest
-@testable import Feisty
 @testable import CommonFiles
 
 class LoginTest: XCTestCase {
