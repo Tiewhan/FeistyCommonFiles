@@ -1,5 +1,5 @@
 PODS:
-  - CommonFiles (0.1.0)
+  - CommonFiles (1.0.0)
 
 DEPENDENCIES:
   - CommonFiles (from `../`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  CommonFiles: f3d436f6e0669019c9545c739fc2e9c7614dd87a
+  CommonFiles: e79fba99057436f9e8966f37f1bc23ebdbfd6532
 
 PODFILE CHECKSUM: f4db83166fd470380b902d063be8fe36fec58124
 
