@@ -78,6 +78,7 @@ public class GameAPIRepo: GameRepository {
     
   }
   
+  //TODO: Replace gameList with individual game and make the model call the function many times.
   public func getGameDetails(of gameList: [Game], with serviceCaller: ServiceCaller) {
     
     let dispatchGroup = DispatchGroup()
