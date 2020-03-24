@@ -16,6 +16,17 @@ public class Game: NSObject {
   @objc public var shortDescription: String
   @objc public var developers:Array<String> = []
   @objc public var publishers:Array<String> = []
+  
+  public static var defaultValue: Game {
+    
+    let game = Game(appid: "N/A", name: "No Game")
+    game.price = 0.00
+    game.developers.append("No Developers")
+    game.publishers.append("No Publishers")
+    
+    return game
+    
+  }
 
   @objc public init(gameName name: String, gamePrice price: Double, shortDescription: String = "") {
 
@@ -39,15 +50,4 @@ public class Game: NSObject {
     return name
   }
   
-  public static func defaultValue() -> Game {
-    
-    let game = Game(appid: "N/A", name: "No Game")
-    game.price = 0.00
-    game.developers.append("No Developers")
-    game.publishers.append("No Publishers")
-    
-    return game
-    
-  }
-
 }
