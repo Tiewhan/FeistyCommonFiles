@@ -1,6 +1,6 @@
 use_frameworks!
 target 'CommonFiles_Tests' do
   pod 'CommonFiles', :path => '../'
-  
+  pod 'OHHTTPStubs/Swift'
   
 end

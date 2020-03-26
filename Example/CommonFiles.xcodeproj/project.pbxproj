@@ -7,17 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		5A6F5781242A0E75009190FA /* gameList.json in Resources */ = {isa = PBXBuildFile; fileRef = 5A6F5777242A0E75009190FA /* gameList.json */; };
+		5A6F5795242A0F8D009190FA /* MockGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6F5789242A0F8D009190FA /* MockGameView.swift */; };
+		5A6F5796242A0F8D009190FA /* MockGameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6F578A242A0F8D009190FA /* MockGameModel.swift */; };
+		5A6F5797242A0F8D009190FA /* GameDataViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6F578B242A0F8D009190FA /* GameDataViewModelTest.swift */; };
+		5A6F5798242A0F8D009190FA /* ServiceCallerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6F578D242A0F8D009190FA /* ServiceCallerTest.swift */; };
+		5A6F5799242A0F8D009190FA /* XCTestCaseExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6F578E242A0F8D009190FA /* XCTestCaseExtensions.swift */; };
+		5A6F579A242A0F8D009190FA /* LoginModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6F5791242A0F8D009190FA /* LoginModelTest.swift */; };
+		5A6F579B242A0F8D009190FA /* MockLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6F5793242A0F8D009190FA /* MockLoginView.swift */; };
+		5A6F579C242A0F8D009190FA /* LoginTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6F5794242A0F8D009190FA /* LoginTest.swift */; };
 		C66007637789FA68564A5ABE /* Pods_CommonFiles_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5342E7D24DAB656040BB0F54 /* Pods_CommonFiles_Tests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3FD6E21E35BF257F32968D6E /* Pods-CommonFiles_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CommonFiles_Tests.debug.xcconfig"; path = "Target Support Files/Pods-CommonFiles_Tests/Pods-CommonFiles_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		5342E7D24DAB656040BB0F54 /* Pods_CommonFiles_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CommonFiles_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5A6F5777242A0E75009190FA /* gameList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = gameList.json; sourceTree = "<group>"; };
+		5A6F577B242A0E75009190FA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5A6F5789242A0F8D009190FA /* MockGameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockGameView.swift; sourceTree = "<group>"; };
+		5A6F578A242A0F8D009190FA /* MockGameModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockGameModel.swift; sourceTree = "<group>"; };
+		5A6F578B242A0F8D009190FA /* GameDataViewModelTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameDataViewModelTest.swift; sourceTree = "<group>"; };
+		5A6F578D242A0F8D009190FA /* ServiceCallerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceCallerTest.swift; sourceTree = "<group>"; };
+		5A6F578E242A0F8D009190FA /* XCTestCaseExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCTestCaseExtensions.swift; sourceTree = "<group>"; };
+		5A6F5791242A0F8D009190FA /* LoginModelTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginModelTest.swift; sourceTree = "<group>"; };
+		5A6F5793242A0F8D009190FA /* MockLoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockLoginView.swift; sourceTree = "<group>"; };
+		5A6F5794242A0F8D009190FA /* LoginTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginTest.swift; sourceTree = "<group>"; };
 		5C2E92175129C5B5293B9A88 /* Pods-CommonFiles_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CommonFiles_Tests.release.xcconfig"; path = "Target Support Files/Pods-CommonFiles_Tests/Pods-CommonFiles_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		607FACE51AFB9204008FA782 /* CommonFiles_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CommonFiles_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		85DBE1856765012FCCEC3CCB /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		E5368AFFFC41403470C1EBF2 /* CommonFiles.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = CommonFiles.podspec; path = ../CommonFiles.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		F935E2502A6049AB0460EF43 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
@@ -35,6 +51,58 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5A6F5787242A0F8D009190FA /* GameTests */ = {
+			isa = PBXGroup;
+			children = (
+				5A6F5788242A0F8D009190FA /* GameListTests */,
+			);
+			path = GameTests;
+			sourceTree = "<group>";
+		};
+		5A6F5788242A0F8D009190FA /* GameListTests */ = {
+			isa = PBXGroup;
+			children = (
+				5A6F5789242A0F8D009190FA /* MockGameView.swift */,
+				5A6F578A242A0F8D009190FA /* MockGameModel.swift */,
+				5A6F578B242A0F8D009190FA /* GameDataViewModelTest.swift */,
+			);
+			path = GameListTests;
+			sourceTree = "<group>";
+		};
+		5A6F578C242A0F8D009190FA /* ServiceCallerTests */ = {
+			isa = PBXGroup;
+			children = (
+				5A6F578D242A0F8D009190FA /* ServiceCallerTest.swift */,
+			);
+			path = ServiceCallerTests;
+			sourceTree = "<group>";
+		};
+		5A6F578F242A0F8D009190FA /* LoginTests */ = {
+			isa = PBXGroup;
+			children = (
+				5A6F5790242A0F8D009190FA /* LoginModelTest */,
+				5A6F5792242A0F8D009190FA /* LoginViewModelTests */,
+			);
+			path = LoginTests;
+			sourceTree = "<group>";
+		};
+		5A6F5790242A0F8D009190FA /* LoginModelTest */ = {
+			isa = PBXGroup;
+			children = (
+				5A6F5791242A0F8D009190FA /* LoginModelTest.swift */,
+			);
+			path = LoginModelTest;
+			sourceTree = "<group>";
+		};
+		5A6F5792242A0F8D009190FA /* LoginViewModelTests */ = {
+			isa = PBXGroup;
+			children = (
+				5A6F5793242A0F8D009190FA /* MockLoginView.swift */,
+				5A6F5794242A0F8D009190FA /* LoginTest.swift */,
+			);
+			path = LoginViewModelTests;
+			sourceTree = "<group>";
+		};
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
@@ -57,18 +125,14 @@
 		607FACE81AFB9204008FA782 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				607FACEB1AFB9204008FA782 /* Tests.swift */,
-				607FACE91AFB9204008FA782 /* Supporting Files */,
+				5A6F5787242A0F8D009190FA /* GameTests */,
+				5A6F578F242A0F8D009190FA /* LoginTests */,
+				5A6F578C242A0F8D009190FA /* ServiceCallerTests */,
+				5A6F578E242A0F8D009190FA /* XCTestCaseExtensions.swift */,
+				5A6F5777242A0E75009190FA /* gameList.json */,
+				5A6F577B242A0E75009190FA /* Info.plist */,
 			);
 			path = Tests;
-			sourceTree = "<group>";
-		};
-		607FACE91AFB9204008FA782 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				607FACEA1AFB9204008FA782 /* Info.plist */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		607FACF51AFB993E008FA782 /* Podspec Metadata */ = {
@@ -127,12 +191,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = CocoaPods;
 				TargetAttributes = {
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1130;
 					};
 				};
 			};
@@ -160,6 +224,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A6F5781242A0E75009190FA /* gameList.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,10 +261,12 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-CommonFiles_Tests/Pods-CommonFiles_Tests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/CommonFiles/CommonFiles.framework",
+				"${BUILT_PRODUCTS_DIR}/OHHTTPStubs/OHHTTPStubs.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CommonFiles.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OHHTTPStubs.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -213,7 +280,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				607FACEC1AFB9204008FA782 /* Tests.swift in Sources */,
+				5A6F5799242A0F8D009190FA /* XCTestCaseExtensions.swift in Sources */,
+				5A6F5795242A0F8D009190FA /* MockGameView.swift in Sources */,
+				5A6F5796242A0F8D009190FA /* MockGameModel.swift in Sources */,
+				5A6F579C242A0F8D009190FA /* LoginTest.swift in Sources */,
+				5A6F579A242A0F8D009190FA /* LoginModelTest.swift in Sources */,
+				5A6F5798242A0F8D009190FA /* ServiceCallerTest.swift in Sources */,
+				5A6F5797242A0F8D009190FA /* GameDataViewModelTest.swift in Sources */,
+				5A6F579B242A0F8D009190FA /* MockLoginView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,6 +298,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -232,12 +307,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -277,6 +354,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -285,12 +363,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -323,6 +403,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3FD6E21E35BF257F32968D6E /* Pods-CommonFiles_Tests.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -335,6 +416,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 			};
@@ -344,6 +426,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5C2E92175129C5B5293B9A88 /* Pods-CommonFiles_Tests.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",

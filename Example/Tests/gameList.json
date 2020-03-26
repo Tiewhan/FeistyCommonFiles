@@ -1,0 +1,116 @@
+{
+"applist": {
+    "apps": [
+        {
+            "appid": 216938,
+            "name": "Pieterw test app76 ( 216938 )",
+            "developers": [
+                "Pieter"
+            ],
+            "publishers": [
+                "Kutako"
+            ],
+            "short_description": "This is game one"
+        },
+        {
+            "appid": 660010,
+            "name": "test2",
+            "developers": [
+                "Developer One"
+            ],
+            "publishers": [
+                "Kutako"
+            ],
+            "short_description": "This is game two"
+        },
+        {
+            "appid": 660130,
+            "name": "Tiewhan Game",
+            "developers": [
+                "Mystic Games"
+            ],
+            "publishers": [
+                "Kutako"
+            ],
+            "short_description": "This is game three"
+        },
+        {
+            "appid": 742220,
+            "name": "Escape Camp Waddalooh",
+            "developers": [
+                "Jagex"
+            ],
+            "publishers": [
+                "Jagex"
+            ],
+            "short_description": "This is game four"
+        },
+        {
+            "appid": 742230,
+            "name": "A Day For A Kitten",
+            "developers": [
+                "Bethesda"
+            ],
+            "publishers": [
+                "Bethesda"
+            ],
+            "short_description": "This is game five"
+        },
+        {
+            "appid": 742240,
+            "name": "Astebreed - Original Soundtrack",
+            "developers": [
+                "id Software"
+            ],
+            "publishers": [
+                "Bethesda"
+            ],
+            "short_description": "This is game six"
+        },
+        {
+            "appid": 742280,
+            "name": "Yi and the Thousand Moons OST",
+            "developers": [
+                "Activision"
+            ],
+            "publishers": [
+                "Blizzard"
+            ],
+            "short_description": "This is game seven"
+        },
+        {
+            "appid": 742310,
+            "name": "Waste Walkers Survivor Pack DLC",
+            "developers": [
+                "Blizzard"
+            ],
+            "publishers": [
+                "Blizzard"
+            ],
+            "short_description": "This is game eight"
+        },
+        {
+            "appid": 742320,
+            "name": "Lantern of Worlds - The Story of Samir",
+            "developers": [
+                "Blizzard"
+            ],
+            "publishers": [
+                "Blizzard"
+            ],
+            "short_description": "This is game nine"
+        },
+        {
+            "appid": 742330,
+            "name": "Grand Pskov Story - Ost and Art",
+            "developers": [
+                "EA Games"
+            ],
+            "publishers": [
+                "EA Games"
+            ],
+            "short_description": "This is game ten"
+        }
+    ]
+  }
+}
