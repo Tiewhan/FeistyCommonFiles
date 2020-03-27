@@ -70,9 +70,7 @@
 		5A6F5788242A0F8D009190FA /* GameListTests */ = {
 			isa = PBXGroup;
 			children = (
-				5A6F5789242A0F8D009190FA /* MockGameView.swift */,
-				5A6F578A242A0F8D009190FA /* MockGameModel.swift */,
-				5A6F578B242A0F8D009190FA /* GameDataViewModelTest.swift */,
+				5A6F57BC242DE4C6009190FA /* ViewModel */,
 			);
 			path = GameListTests;
 			sourceTree = "<group>";
@@ -126,6 +124,16 @@
 				5A6F57B8242DD73E009190FA /* GameDetailsViewModelTests.swift */,
 			);
 			path = GameDetailsTests;
+			sourceTree = "<group>";
+		};
+		5A6F57BC242DE4C6009190FA /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				5A6F5789242A0F8D009190FA /* MockGameView.swift */,
+				5A6F578A242A0F8D009190FA /* MockGameModel.swift */,
+				5A6F578B242A0F8D009190FA /* GameDataViewModelTest.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		607FACC71AFB9204008FA782 = {
