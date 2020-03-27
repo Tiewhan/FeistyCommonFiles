@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import "GameDetailsLoadedType.h"
+@import FirebaseAnalytics;
 @class Game;
 
 NS_ASSUME_NONNULL_BEGIN

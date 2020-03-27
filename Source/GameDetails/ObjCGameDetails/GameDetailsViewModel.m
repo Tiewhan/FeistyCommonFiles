@@ -8,6 +8,7 @@
 #import "GameDetailsViewModel.h"
 #import "GameDetailsLoadedType.h"
 #import <CommonFiles/CommonFiles-Swift.h>
+@import FirebaseAnalytics;
 
 @implementation GameDetailsViewModel
 
@@ -27,6 +28,11 @@
 }
 
 - (void)getGameData {
+  [FIRAnalytics logEventWithName:kFIREventLogin
+                      parameters:@{ kFIRParameterItemID: [NSString stringWithFormat:@"id-%@", self.selectedGame.appID],
+                                    kFIRParameterItemName: self.selectedGame.name,
+                                    kFIRParameterContentType: @"game"
+                      }];
   
   NSString* gameName = self.selectedGame.name;
   NSString* appID = self.selectedGame.appID;
