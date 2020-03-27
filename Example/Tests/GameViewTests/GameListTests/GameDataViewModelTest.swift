@@ -65,6 +65,30 @@ class GameDataViewModelTest: XCTestCase {
   
   func testGivenInvalidIndexWhenGetDetailsIsCalledThenGiveDefaultGameDetails() {
     
+    let testIndex = -1
+    let correctGame = Game.defaultValue
+    
+    let result = systemUnderTest.getGameDetails(at: testIndex)
+    
+    XCTAssert(result.gameName == correctGame.name)
+    XCTAssert(result.gamePrice == "R\(correctGame.price)")
+    
+  }
+  
+  func testGivenModelThatHasDataWhenGetPageCountIsCalledThenReturnValidPageCount() {
+    
+    let result = systemUnderTest.getPageCount()
+    
+    XCTAssert(result == 5)
+    
+  }
+  
+  func testGivenSystemWhenGameFinishedLoadingEventTriggeredThenEnsureViewDoesRepond() {
+    
+    systemUnderTest.gamesFinishedLoading()
+    
+    XCTAssertTrue(mockGameView.gameDataLoaded)
+    
   }
   
 }

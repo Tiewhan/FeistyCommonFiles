@@ -11,6 +11,7 @@ import XCTest
 
 class MockGameModel: GameModelProtocol {
   var gameList: [Game] = []
+  var gameLoadedObservers: [String:GameModelObserver] = [:]
   
   func loadData() {
     gameList.append(Game(appid: "1", name: "Game One"))
@@ -23,6 +24,14 @@ class MockGameModel: GameModelProtocol {
     gameList[3].price = 25.00
     gameList.append(Game(appid: "5", name: "Game Five"))
     gameList[4].price = 30.00
+    
+    
+  }
+  
+  func notifyGameLoadedObservers() {
+    gameLoadedObservers.forEach { _,observer in
+      observer.gamesFinishedLoading()
+    }
   }
   
   func getGameAt(index: Int) -> Game {
@@ -43,11 +52,11 @@ class MockGameModel: GameModelProtocol {
   }
   
   func subscribeToGameModelGamesLoaded(subscriber observer: GameModelObserver, subscriberID observerID: String) {
-    
+    gameLoadedObservers[observerID] = observer
   }
   
   func unsubscribeFromGameModelGamesLoaded(subscriberID observerID: String) {
-    
+    gameLoadedObservers.removeValue(forKey: observerID)
   }
   
 }
