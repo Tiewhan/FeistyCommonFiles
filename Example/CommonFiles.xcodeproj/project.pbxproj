@@ -17,6 +17,8 @@
 		5A6F579B242A0F8D009190FA /* MockLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6F5793242A0F8D009190FA /* MockLoginView.swift */; };
 		5A6F579C242A0F8D009190FA /* LoginTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6F5794242A0F8D009190FA /* LoginTest.swift */; };
 		5A6F57B1242DD0EC009190FA /* GameClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6F57B0242DD0EC009190FA /* GameClassTest.swift */; };
+		5A6F57B4242DD4F4009190FA /* MockGameDetailsLoadedType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6F57B3242DD4F4009190FA /* MockGameDetailsLoadedType.swift */; };
+		5A6F57B9242DD73E009190FA /* GameDetailsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6F57B8242DD73E009190FA /* GameDetailsViewModelTests.swift */; };
 		C66007637789FA68564A5ABE /* Pods_CommonFiles_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5342E7D24DAB656040BB0F54 /* Pods_CommonFiles_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -34,6 +36,9 @@
 		5A6F5793242A0F8D009190FA /* MockLoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockLoginView.swift; sourceTree = "<group>"; };
 		5A6F5794242A0F8D009190FA /* LoginTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginTest.swift; sourceTree = "<group>"; };
 		5A6F57B0242DD0EC009190FA /* GameClassTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameClassTest.swift; sourceTree = "<group>"; };
+		5A6F57B3242DD4F4009190FA /* MockGameDetailsLoadedType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockGameDetailsLoadedType.swift; sourceTree = "<group>"; };
+		5A6F57B5242DD625009190FA /* CommonFiles_Tests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CommonFiles_Tests-Bridging-Header.h"; sourceTree = "<group>"; };
+		5A6F57B8242DD73E009190FA /* GameDetailsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDetailsViewModelTests.swift; sourceTree = "<group>"; };
 		5C2E92175129C5B5293B9A88 /* Pods-CommonFiles_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CommonFiles_Tests.release.xcconfig"; path = "Target Support Files/Pods-CommonFiles_Tests/Pods-CommonFiles_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		607FACE51AFB9204008FA782 /* CommonFiles_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CommonFiles_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		85DBE1856765012FCCEC3CCB /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
@@ -56,6 +61,7 @@
 		5A6F5787242A0F8D009190FA /* GameViewTests */ = {
 			isa = PBXGroup;
 			children = (
+				5A6F57B2242DD487009190FA /* GameDetailsTests */,
 				5A6F5788242A0F8D009190FA /* GameListTests */,
 			);
 			path = GameViewTests;
@@ -113,6 +119,15 @@
 			path = GameTests;
 			sourceTree = "<group>";
 		};
+		5A6F57B2242DD487009190FA /* GameDetailsTests */ = {
+			isa = PBXGroup;
+			children = (
+				5A6F57B3242DD4F4009190FA /* MockGameDetailsLoadedType.swift */,
+				5A6F57B8242DD73E009190FA /* GameDetailsViewModelTests.swift */,
+			);
+			path = GameDetailsTests;
+			sourceTree = "<group>";
+		};
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
@@ -135,6 +150,7 @@
 		607FACE81AFB9204008FA782 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				5A6F57B5242DD625009190FA /* CommonFiles_Tests-Bridging-Header.h */,
 				5A6F57AF242DD0C5009190FA /* GameTests */,
 				5A6F5787242A0F8D009190FA /* GameViewTests */,
 				5A6F578F242A0F8D009190FA /* LoginTests */,
@@ -298,9 +314,11 @@
 				5A6F5799242A0F8D009190FA /* XCTestCaseExtensions.swift in Sources */,
 				5A6F5795242A0F8D009190FA /* MockGameView.swift in Sources */,
 				5A6F5796242A0F8D009190FA /* MockGameModel.swift in Sources */,
+				5A6F57B4242DD4F4009190FA /* MockGameDetailsLoadedType.swift in Sources */,
 				5A6F579C242A0F8D009190FA /* LoginTest.swift in Sources */,
 				5A6F579A242A0F8D009190FA /* LoginModelTest.swift in Sources */,
 				5A6F5798242A0F8D009190FA /* ServiceCallerTest.swift in Sources */,
+				5A6F57B9242DD73E009190FA /* GameDetailsViewModelTests.swift in Sources */,
 				5A6F5797242A0F8D009190FA /* GameDataViewModelTest.swift in Sources */,
 				5A6F57B1242DD0EC009190FA /* GameClassTest.swift in Sources */,
 				5A6F579B242A0F8D009190FA /* MockLoginView.swift in Sources */,
@@ -432,6 +450,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Tests/CommonFiles_Tests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
@@ -451,6 +470,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Tests/CommonFiles_Tests-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 			};
