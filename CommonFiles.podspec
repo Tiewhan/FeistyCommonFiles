@@ -31,6 +31,7 @@ TODO: Add long description of the pod here.
   s.ios.deployment_target = '12.0'
 
   s.source_files = 'Source/**/*.{swift,h,m}'
+  s.static_framework = true
   
   # s.resource_bundles = {
   #   'CommonFiles' => ['CommonFiles/Assets/*.png']
@@ -38,5 +39,5 @@ TODO: Add long description of the pod here.
 
   s.public_header_files = 'Source/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  s.dependency 'Firebase/Analytics'
 end
