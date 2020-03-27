@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import FirebaseAnalytics
 
 public class LoginViewModel {
   
@@ -33,6 +34,7 @@ public class LoginViewModel {
     
     if loggedIn {
       view?.authenticationSuccess()
+      Analytics.logEvent(AnalyticsEventLogin, parameters: [:])
     } else {
       view?.authenticationFailure()
     }
