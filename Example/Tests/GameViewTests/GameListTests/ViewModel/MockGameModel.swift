@@ -24,8 +24,6 @@ class MockGameModel: GameModelProtocol {
     gameList[3].price = 25.00
     gameList.append(Game(appid: "5", name: "Game Five"))
     gameList[4].price = 30.00
-    
-    
   }
   
   func notifyGameLoadedObservers() {
