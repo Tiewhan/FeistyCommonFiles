@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>336365743042-nsainm8mo4qm1psfflq0s9de972pc6ve.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.336365743042-nsainm8mo4qm1psfflq0s9de972pc6ve</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAceHMv1WVXqEV5UucXZQ4MsW3WR2ywHts</string>
+	<key>GCM_SENDER_ID</key>
+	<string>336365743042</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>za.co.dvt.Feisty</string>
+	<key>PROJECT_ID</key>
+	<string>fesity-ee193</string>
+	<key>STORAGE_BUCKET</key>
+	<string>fesity-ee193.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:336365743042:ios:16438da18fd30e5596c45b</string>
+	<key>DATABASE_URL</key>
+	<string>https://fesity-ee193.firebaseio.com</string>
+</dict>
+</plist>
