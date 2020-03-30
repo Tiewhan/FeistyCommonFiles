@@ -19,6 +19,4 @@ extension MockGameViewModel: GameModelObserver {
   func gamesFinishedLoading() {
     gamesFinishedLoadingCalled = gamesFinishedLoadingCalled ? false : true
   }
-  
-  
-}
+  }

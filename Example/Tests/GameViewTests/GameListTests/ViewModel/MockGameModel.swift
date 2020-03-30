@@ -11,7 +11,7 @@ import XCTest
 
 class MockGameModel: GameModelProtocol {
   var gameList: [Game] = []
-  var gameLoadedObservers: [String:GameModelObserver] = [:]
+  var gameLoadedObservers: [String: GameModelObserver] = [:]
   
   func loadData() {
     gameList.append(Game(appid: "1", name: "Game One"))
@@ -27,7 +27,7 @@ class MockGameModel: GameModelProtocol {
   }
   
   func notifyGameLoadedObservers() {
-    gameLoadedObservers.forEach { _,observer in
+    gameLoadedObservers.forEach { _, observer in
       observer.gamesFinishedLoading()
     }
   }

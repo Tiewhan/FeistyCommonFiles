@@ -11,7 +11,7 @@ import CommonFiles
 
 class MockGameRepo {
   
-  var gamesLoadedObservers: [String:GameRepositoryObserver] = [:]
+  var gamesLoadedObservers: [String: GameRepositoryObserver] = [:]
   var gameList: [Game] = []
   var getGameListCalled = false
   var getGameDetailsCalled = false
