@@ -78,58 +78,81 @@ public class GameAPIRepo: GameRepository {
     
   }
   
-  //TODO: Replace gameList with individual game and make the model call the function many times.
   public func getGameDetails(of gameList: [Game], with serviceCaller: ServiceCaller) {
     
-    let dispatchGroup = DispatchGroup()
+    let operationQueue = OperationQueue()
     
-    gameList.forEach({ (game) in
+    let serviceCallOperation = createServiceCallBlockOperation(using: serviceCaller,
+                                                               forGamesList: gameList)
+    
+    let notifyOperation = BlockOperation {
+      self.notifyGameDetailsLoaded(withData: gameList)
+    }
+    
+    notifyOperation.addDependency(serviceCallOperation)
+    
+    operationQueue.addOperation(serviceCallOperation)
+    operationQueue.addOperation(notifyOperation)
+    
+  }
+  
+  private func createServiceCallBlockOperation(using serviceCaller: ServiceCaller,
+                                               forGamesList gameList: [Game]) -> BlockOperation {
+    
+    let serviceCallOperation = BlockOperation {
       
-      dispatchGroup.enter()
+      let dispatchGroup = DispatchGroup()
       
-      let dataBundle = DataBundle()
-      dataBundle.extraData["game"] = game
-      
-      // MARK: - Call Succeeded Closure
-      serviceCaller.callSucceeded = { [weak self] data, dataBundle in
+      gameList.forEach({ (game) in
         
-        guard let game = dataBundle.extraData["game"] as? Game else {
-          return
+        dispatchGroup.enter()
+        
+        let dataBundle = DataBundle()
+        dataBundle.extraData["game"] = game
+        
+        // MARK: - Call Succeeded Closure
+        serviceCaller.callSucceeded = { [weak self] data, dataBundle in
+          
+          guard let game = dataBundle.extraData["game"] as? Game else {
+            return
+          }
+          
+          guard let self = self else {
+            return
+          }
+          
+          self.decodeGameDetails(using: data, basedOn: game)
+          
+          dispatchGroup.leave()
+          
         }
         
-        guard let self = self else {
-          return
-        }
-        
-       self.decodeGameDetails(using: data, basedOn: game)
-        
-      }
-      
-      // MARK: - ---------------------------
+        // MARK: - ---------------------------
 
-      // MARK: - Call Failed Closure
-      serviceCaller.callFailed = { error in
+        // MARK: - Call Failed Closure
+        serviceCaller.callFailed = { error in
+          dispatchGroup.leave()
+        }
         
-      }
+        // MARK: - ---------------------------
+        
+        let urlString = "\(SteamURLComponents.specificGameURL)\(game.appID)"
+        let url: URL = URL(string: urlString)!
+        
+        do {
+          try serviceCaller.makeServiceCall(with: url, and: dataBundle)
+        } catch {
+          dispatchGroup.leave()
+          fatalError("Service call not set up properly")
+        }
+        
+      })
       
-      // MARK: - ---------------------------
+      dispatchGroup.wait()
       
-      let urlString = "\(SteamURLComponents.specificGameURL)\(game.appID)"
-      let url: URL = URL(string: urlString)!
-      
-      do {
-        try serviceCaller.makeServiceCall(with: url, and: dataBundle)
-      } catch {
-        fatalError("Service call not set up properly")
-      }
-      
-      dispatchGroup.leave()
-      
-    })
+    }
     
-    dispatchGroup.wait()
-    
-    self.notifyGameDetailsLoaded(withData: gameList)
+    return serviceCallOperation
     
   }
   
