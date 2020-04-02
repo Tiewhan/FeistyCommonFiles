@@ -23,6 +23,21 @@ struct JsonGame: Codable {
   let name: String
 }
 
+fileprivate struct gameDataBundleKeys {
+  static let game: String = "game"
+}
+
+fileprivate struct gameDetailsJSONResponseKeys {
+  
+  static let data: String = "data"
+  static let priceOverview: String = "price_overview"
+  static let finalPriceOverview: String = "final"
+  static let shortDescription: String = "short_description"
+  static let developers: String = "developers"
+  static let publishers: String = "publishers"
+  
+}
+
 public class GameAPIRepo: GameRepository {
   
   private var observers: [String: GameRepositoryObserver] = [:]
@@ -108,12 +123,12 @@ public class GameAPIRepo: GameRepository {
         dispatchGroup.enter()
         
         let dataBundle = DataBundle()
-        dataBundle.extraData["game"] = game
+        dataBundle.extraData[gameDataBundleKeys.game] = game
         
         // MARK: - Call Succeeded Closure
         serviceCaller.callSucceeded = { [weak self] data, dataBundle in
           
-          guard let game = dataBundle.extraData["game"] as? Game else {
+          guard let game = dataBundle.extraData[gameDataBundleKeys.game] as? Game else {
             return
           }
           
@@ -174,23 +189,23 @@ public class GameAPIRepo: GameRepository {
   
   private func extractGameData(detailsWrapper: [String: Any], game: Game) {
 
-    guard let gameDetailsData = detailsWrapper["data"] as? [String: Any] else {
+    guard let gameDetailsData = detailsWrapper[gameDetailsJSONResponseKeys.data] as? [String: Any] else {
       return
     }
 
-    if let priceOverview = gameDetailsData["price_overview"] as? [String: Any] {
-      game.price = Double((priceOverview["final"] as? Int ?? 0)/100)
+    if let priceOverview = gameDetailsData[gameDetailsJSONResponseKeys.priceOverview] as? [String: Any] {
+      game.price = Double((priceOverview[gameDetailsJSONResponseKeys.finalPriceOverview] as? Int ?? 0)/100)
     }
     
-    if let shortDescription = gameDetailsData["short_description"] as? String {
+    if let shortDescription = gameDetailsData[gameDetailsJSONResponseKeys.shortDescription] as? String {
       game.shortDescription = shortDescription
     }
     
-    if let developers = gameDetailsData["developers"] as? Array<String> {
+    if let developers = gameDetailsData[gameDetailsJSONResponseKeys.developers] as? Array<String> {
       game.developers = developers
     }
     
-    if let publishers = gameDetailsData["publishers"] as? Array<String> {
+    if let publishers = gameDetailsData[gameDetailsJSONResponseKeys.publishers] as? Array<String> {
       game.publishers = publishers
     }
     
