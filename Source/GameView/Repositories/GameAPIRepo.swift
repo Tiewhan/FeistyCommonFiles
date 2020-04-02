@@ -128,11 +128,13 @@ public class GameAPIRepo: GameRepository {
         // MARK: - Call Succeeded Closure
         serviceCaller.callSucceeded = { [weak self] data, dataBundle in
           
-          guard let game = dataBundle.extraData[gameDataBundleKeys.game] as? Game else {
+          guard let self = self else {
+            dispatchGroup.leave()
             return
           }
           
-          guard let self = self else {
+          guard let game = dataBundle.extraData[gameDataBundleKeys.game] as? Game else {
+            dispatchGroup.leave()
             return
           }
           
