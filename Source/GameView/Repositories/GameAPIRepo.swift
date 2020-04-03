@@ -23,6 +23,21 @@ struct JsonGame: Codable {
   let name: String
 }
 
+fileprivate struct gameDataBundleKeys {
+  static let game: String = "game"
+}
+
+fileprivate struct gameDetailsJSONResponseKeys {
+  
+  static let data: String = "data"
+  static let priceOverview: String = "price_overview"
+  static let finalPriceOverview: String = "final"
+  static let shortDescription: String = "short_description"
+  static let developers: String = "developers"
+  static let publishers: String = "publishers"
+  
+}
+
 public class GameAPIRepo: GameRepository {
   
   private var observers: [String: GameRepositoryObserver] = [:]
@@ -78,58 +93,83 @@ public class GameAPIRepo: GameRepository {
     
   }
   
-  //TODO: Replace gameList with individual game and make the model call the function many times.
   public func getGameDetails(of gameList: [Game], with serviceCaller: ServiceCaller) {
     
-    let dispatchGroup = DispatchGroup()
+    let operationQueue = OperationQueue()
     
-    gameList.forEach({ (game) in
+    let serviceCallOperation = createServiceCallBlockOperation(using: serviceCaller,
+                                                               forGamesList: gameList)
+    
+    let notifyOperation = BlockOperation {
+      self.notifyGameDetailsLoaded(withData: gameList)
+    }
+    
+    notifyOperation.addDependency(serviceCallOperation)
+    
+    operationQueue.addOperation(serviceCallOperation)
+    operationQueue.addOperation(notifyOperation)
+    
+  }
+  
+  private func createServiceCallBlockOperation(using serviceCaller: ServiceCaller,
+                                               forGamesList gameList: [Game]) -> BlockOperation {
+    
+    let serviceCallOperation = BlockOperation {
       
-      dispatchGroup.enter()
+      let dispatchGroup = DispatchGroup()
       
-      let dataBundle = DataBundle()
-      dataBundle.extraData["game"] = game
-      
-      // MARK: - Call Succeeded Closure
-      serviceCaller.callSucceeded = { [weak self] data, dataBundle in
+      gameList.forEach({ (game) in
         
-        guard let game = dataBundle.extraData["game"] as? Game else {
-          return
+        dispatchGroup.enter()
+        
+        let dataBundle = DataBundle()
+        dataBundle.extraData[gameDataBundleKeys.game] = game
+        
+        // MARK: - Call Succeeded Closure
+        serviceCaller.callSucceeded = { [weak self] data, dataBundle in
+          
+          guard let self = self else {
+            dispatchGroup.leave()
+            return
+          }
+          
+          guard let game = dataBundle.extraData[gameDataBundleKeys.game] as? Game else {
+            dispatchGroup.leave()
+            return
+          }
+          
+          self.decodeGameDetails(using: data, basedOn: game)
+          
+          dispatchGroup.leave()
+          
         }
         
-        guard let self = self else {
-          return
-        }
-        
-       self.decodeGameDetails(using: data, basedOn: game)
-        
-      }
-      
-      // MARK: - ---------------------------
+        // MARK: - ---------------------------
 
-      // MARK: - Call Failed Closure
-      serviceCaller.callFailed = { error in
+        // MARK: - Call Failed Closure
+        serviceCaller.callFailed = { error in
+          dispatchGroup.leave()
+        }
         
-      }
+        // MARK: - ---------------------------
+        
+        let urlString = "\(SteamURLComponents.specificGameURL)\(game.appID)"
+        let url: URL = URL(string: urlString)!
+        
+        do {
+          try serviceCaller.makeServiceCall(with: url, and: dataBundle)
+        } catch {
+          dispatchGroup.leave()
+          fatalError("Service call not set up properly")
+        }
+        
+      })
       
-      // MARK: - ---------------------------
+      dispatchGroup.wait()
       
-      let urlString = "\(SteamURLComponents.specificGameURL)\(game.appID)"
-      let url: URL = URL(string: urlString)!
-      
-      do {
-        try serviceCaller.makeServiceCall(with: url, and: dataBundle)
-      } catch {
-        fatalError("Service call not set up properly")
-      }
-      
-      dispatchGroup.leave()
-      
-    })
+    }
     
-    dispatchGroup.wait()
-    
-    self.notifyGameDetailsLoaded(withData: gameList)
+    return serviceCallOperation
     
   }
   
@@ -151,23 +191,23 @@ public class GameAPIRepo: GameRepository {
   
   private func extractGameData(detailsWrapper: [String: Any], game: Game) {
 
-    guard let gameDetailsData = detailsWrapper["data"] as? [String: Any] else {
+    guard let gameDetailsData = detailsWrapper[gameDetailsJSONResponseKeys.data] as? [String: Any] else {
       return
     }
 
-    if let priceOverview = gameDetailsData["price_overview"] as? [String: Any] {
-      game.price = Double((priceOverview["final"] as? Int ?? 0)/100)
+    if let priceOverview = gameDetailsData[gameDetailsJSONResponseKeys.priceOverview] as? [String: Any] {
+      game.price = Double((priceOverview[gameDetailsJSONResponseKeys.finalPriceOverview] as? Int ?? 0)/100)
     }
     
-    if let shortDescription = gameDetailsData["short_description"] as? String {
+    if let shortDescription = gameDetailsData[gameDetailsJSONResponseKeys.shortDescription] as? String {
       game.shortDescription = shortDescription
     }
     
-    if let developers = gameDetailsData["developers"] as? Array<String> {
+    if let developers = gameDetailsData[gameDetailsJSONResponseKeys.developers] as? Array<String> {
       game.developers = developers
     }
     
-    if let publishers = gameDetailsData["publishers"] as? Array<String> {
+    if let publishers = gameDetailsData[gameDetailsJSONResponseKeys.publishers] as? Array<String> {
       game.publishers = publishers
     }
     
