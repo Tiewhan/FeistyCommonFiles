@@ -20,6 +20,10 @@ public class FriendListModel {
 
 extension FriendListModel: FriendListModelType {
   
+  public func friendListFound(withData friends: [User]) {
+    viewModel.friendListFound(withData: friends)
+  }
+  
   public func getFriendList() {
     
   }
