@@ -13,4 +13,6 @@ public protocol FriendListModelType {
   
   func friendListFound(withData friends: [User])
   
+  func friendListNotFound()
+  
 }
