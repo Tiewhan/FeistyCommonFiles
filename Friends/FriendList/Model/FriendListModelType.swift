@@ -7,12 +7,12 @@
 
 import Foundation
 
-public protocol FriendListModelType {
+public protocol FriendListModelType: FriendListModelObservable {
   
   func getFriendList()
   
-  func friendListFound(withData friends: [User])
+  func getAmountOfFriends() -> Int
   
-  func friendListNotFound()
+  func getFriend(at index: Int) -> User
   
 }
