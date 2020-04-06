@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol FriendListRepositoryType {
+public protocol FriendListRepositoryType: FriendListRepoObservable {
   
   func getFriendListData(using serviceCaller: ServiceCaller)
   
