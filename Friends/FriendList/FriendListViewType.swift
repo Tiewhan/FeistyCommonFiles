@@ -7,8 +7,10 @@
 
 import Foundation
 
-public protocol FriendListViewType {
+public protocol FriendListViewType: AnyObject {
  
-  func dataRecivedOf(friends friendList: [UserDataTransferObject])
+  func dataLoaded()
+  
+  func errorLoadingData()
   
 }
