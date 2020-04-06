@@ -9,8 +9,8 @@ import Foundation
 
 public protocol FriendListViewModelType {
   
-  func getFriendList()
+  func getFriend(at index: Int) -> UserDataTransferObject
   
-  func friendListFound(withData friends: [User])
+  func getAmountOfFriends() -> Int
   
 }

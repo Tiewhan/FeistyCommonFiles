@@ -9,8 +9,8 @@ import Foundation
 
 public struct UserDataTransferObject {
   
-  let userID: String
-  let username: String
-  let status: String
+  public let userID: String
+  public let username: String
+  public let status: String
   
 }
