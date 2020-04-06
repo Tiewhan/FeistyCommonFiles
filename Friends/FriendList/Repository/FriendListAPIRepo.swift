@@ -29,33 +29,50 @@ fileprivate struct jsonFriend: Codable {
   
 }
 
-class FriendListAPIRepo {
+public class FriendListAPIRepo {
   
-  private var model: FriendListModelType
+  public var observers: [String : FriendListRepoObserver] = [:]
   
-  init(withModel model: FriendListModelType) {
-    self.model = model
-  }
+  public init(){ }
   
 }
 
 extension FriendListAPIRepo: FriendListRepositoryType {
   
-  func getFriendListData(using serviceCaller: ServiceCaller) {
+  public func subscribeToFriendListModel(with subscriber: FriendListRepoObserver, andID observerID: String) {
+    observers[observerID] = subscriber
+  }
+  
+  public func unsubscribeFromFriendListModel(withID observerID: String) {
+    observers.removeValue(forKey: observerID)
+  }
+  
+  public func getFriendListData(using serviceCaller: ServiceCaller) {
     
-    let friendsURL = URL(fileURLWithPath: FeistyAPIURLComponents.getFriendList)
+    let urlString = FeistyAPIURLComponents.getFriendList
+    
+    guard let friendsURL = URL(string: urlString) else {
+      return
+    }
+    
     let dataBundle = DataBundle()
     
     serviceCaller.callSucceeded = { data, dataBundle in
       
       let friendList = self.decodeFriendList(data: data)
       
-      self.model.friendListFound(withData: friendList)
+      self.observers.forEach { observer in
+        observer.value.friendsListRetrieved(withData: friendList)
+      }
       
     }
     
     serviceCaller.callFailed = { error in
-      self.model.friendListNotFound()
+      
+      self.observers.forEach { observer in
+        observer.value.failedToLoadFriends()
+      }
+      
     }
     
     do {
