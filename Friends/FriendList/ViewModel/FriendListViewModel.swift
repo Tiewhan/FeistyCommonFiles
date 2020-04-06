@@ -9,33 +9,29 @@ import Foundation
 
 public class FriendListViewModel {
   
-  private var view: FriendListViewType
+  private weak var view: FriendListViewType?
   private var model: FriendListModelType
   
-  init(withView view: FriendListViewType, andModel model: FriendListModelType) {
+  public init(withView view: FriendListViewType, andModel model: FriendListModelType) {
     self.view = view
     self.model = model
+    
+    self.model.subscribeToFriendListModel(with: self, andID: observerID)
+    self.model.getFriendList()
+    
   }
   
-  private func friendDataRecieved(withData friends: [User]) {
-    view.dataRecivedOf(friends: mapDataToDTO(from: friends))
+  private func friendDataRecieved() {
+    view?.dataLoaded()
   }
   
-  private func mapDataToDTO(from data: [User]) -> [UserDataTransferObject] {
+  private func mapDataToDTO(from data: User) -> UserDataTransferObject {
+  
+    let userID: String = data.userID
+    let username: String = data.username
+    let status: String = data.status.rawValue
     
-    var dataTransferObjectList: [UserDataTransferObject] = []
-    
-    data.forEach { element in
-      
-      let userID: String = element.userID
-      let username: String = element.username
-      let status: String = element.status.rawValue
-      
-      dataTransferObjectList.append(UserDataTransferObject(userID: userID, username: username, status: status))
-      
-    }
-    
-    return dataTransferObjectList
+    return UserDataTransferObject(userID: userID, username: username, status: status)
     
   }
   
@@ -43,12 +39,28 @@ public class FriendListViewModel {
 
 extension FriendListViewModel: FriendListViewModelType {
   
-  public func getFriendList() {
-    model.getFriendList()
+  public func getFriend(at index: Int) -> UserDataTransferObject{
+    return mapDataToDTO(from: model.getFriend(at: index))
   }
   
-  public func friendListFound(withData friends: [User]) {
-    friendDataRecieved(withData: friends)
+  public func getAmountOfFriends() -> Int {
+    return model.getAmountOfFriends()
+  }
+  
+}
+
+extension FriendListViewModel: FriendListModelObserver {
+  
+  public var observerID: String {
+    return "FriendListViewModelObserver"
+  }
+  
+  public func friendListNotFound() {
+    view?.errorLoadingData()
+  }
+  
+  public func friendListFound() {
+    friendDataRecieved()
   }
   
 }
