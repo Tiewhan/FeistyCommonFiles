@@ -11,4 +11,6 @@ public protocol FriendListViewModelType {
   
   func getFriendList()
   
+  func friendListFound(withData friends: [User])
+  
 }
