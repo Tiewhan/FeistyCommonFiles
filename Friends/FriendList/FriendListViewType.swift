@@ -7,8 +7,8 @@
 
 import Foundation
 
-protocol FriendListViewType {
+public protocol FriendListViewType {
  
-  
+  func dataRecivedOf(friends friendList: [UserDataTransferObject])
   
 }
