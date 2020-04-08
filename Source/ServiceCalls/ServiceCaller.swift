@@ -84,7 +84,7 @@ public class ServiceCaller {
     request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
     
     let parameters: [String: Any] = data.extraData[DataBundleKeys.postParameters]
-                                    as? [String : Any] ?? [:]
+                                    as? [String: Any] ?? [:]
     data.extraData.removeValue(forKey: DataBundleKeys.postParameters)
     
     request.httpBody = parameters.percentEncoded()
