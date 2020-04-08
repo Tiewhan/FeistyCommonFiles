@@ -25,22 +25,12 @@ public class FriendListViewModel {
     view?.dataLoaded()
   }
   
-  private func mapDataToDTO(from data: User) -> UserDataTransferObject {
-  
-    let userID: String = data.userID
-    let username: String = data.username
-    let status: String = data.status.rawValue
-    
-    return UserDataTransferObject(userID: userID, username: username, status: status)
-    
-  }
-  
 }
 
 extension FriendListViewModel: FriendListViewModelType {
   
   public func getFriend(at index: Int) -> UserDataTransferObject{
-    return mapDataToDTO(from: model.getFriend(at: index))
+    return UserDataTransferObject.mapToDTO(of: model.getFriend(at: index))
   }
   
   public func getAmountOfFriends() -> Int {

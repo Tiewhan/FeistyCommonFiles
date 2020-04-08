@@ -27,7 +27,12 @@ public class FriendListModel {
 extension FriendListModel: FriendListModelType {
   
   public func getFriend(at index: Int) -> User {
+    
+    if index < 0 || index >= friendList.count {
+      return User.defaultValue
+    }
     return friendList[index]
+    
   }
     public func subscribeToFriendListModel(with subscriber: FriendListModelObserver, andID observerID: String) {
     observers[observerID] = subscriber

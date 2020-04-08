@@ -21,7 +21,11 @@ public class User {
   var username: String
   var status: UserStatus
   
-  init(withUserID userID: String, andUsername username: String, andStatus status: UserStatus) {
+  public static var defaultValue: User {
+    return User(withUserID: "N/A", andUsername: "No Username", andStatus: .offline)
+  }
+  
+  public init(withUserID userID: String, andUsername username: String, andStatus status: UserStatus) {
     
     self.userID = userID
     self.username = username

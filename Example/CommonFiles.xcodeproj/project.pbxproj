@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A308CA2243C8ACF0035106E /* FriendListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A308CA1243C8ACF0035106E /* FriendListViewModelTests.swift */; };
+		5A308CA4243C8B3A0035106E /* MockFriendsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A308CA3243C8B3A0035106E /* MockFriendsListView.swift */; };
+		5A308CA6243C8B620035106E /* MockFiendsListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A308CA5243C8B620035106E /* MockFiendsListModel.swift */; };
+		5A308CAA243C94CD0035106E /* FriendListModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A308CA9243C94CD0035106E /* FriendListModelTests.swift */; };
+		5A308CAC243C94F20035106E /* MockFriendListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A308CAB243C94F20035106E /* MockFriendListViewModel.swift */; };
+		5A308CAE243C95000035106E /* MockFriendListAPIRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A308CAD243C95000035106E /* MockFriendListAPIRepo.swift */; };
+		5A308CB1243CA1570035106E /* FriendListAPIRepoTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A308CB0243CA1570035106E /* FriendListAPIRepoTest.swift */; };
 		5A6F5781242A0E75009190FA /* gameList.json in Resources */ = {isa = PBXBuildFile; fileRef = 5A6F5777242A0E75009190FA /* gameList.json */; };
 		5A6F5795242A0F8D009190FA /* MockGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6F5789242A0F8D009190FA /* MockGameView.swift */; };
 		5A6F5796242A0F8D009190FA /* MockGameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6F578A242A0F8D009190FA /* MockGameModel.swift */; };
@@ -28,6 +35,13 @@
 /* Begin PBXFileReference section */
 		3FD6E21E35BF257F32968D6E /* Pods-CommonFiles_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CommonFiles_Tests.debug.xcconfig"; path = "Target Support Files/Pods-CommonFiles_Tests/Pods-CommonFiles_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		5342E7D24DAB656040BB0F54 /* Pods_CommonFiles_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CommonFiles_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5A308CA1243C8ACF0035106E /* FriendListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListViewModelTests.swift; sourceTree = "<group>"; };
+		5A308CA3243C8B3A0035106E /* MockFriendsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFriendsListView.swift; sourceTree = "<group>"; };
+		5A308CA5243C8B620035106E /* MockFiendsListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFiendsListModel.swift; sourceTree = "<group>"; };
+		5A308CA9243C94CD0035106E /* FriendListModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListModelTests.swift; sourceTree = "<group>"; };
+		5A308CAB243C94F20035106E /* MockFriendListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFriendListViewModel.swift; sourceTree = "<group>"; };
+		5A308CAD243C95000035106E /* MockFriendListAPIRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFriendListAPIRepo.swift; sourceTree = "<group>"; };
+		5A308CB0243CA1570035106E /* FriendListAPIRepoTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListAPIRepoTest.swift; sourceTree = "<group>"; };
 		5A6F5777242A0E75009190FA /* gameList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = gameList.json; sourceTree = "<group>"; };
 		5A6F577B242A0E75009190FA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A6F5789242A0F8D009190FA /* MockGameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockGameView.swift; sourceTree = "<group>"; };
@@ -64,6 +78,60 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5A308C9E243C8A080035106E /* FriendTests */ = {
+			isa = PBXGroup;
+			children = (
+				5A308C9F243C8A660035106E /* FriendListTests */,
+			);
+			path = FriendTests;
+			sourceTree = "<group>";
+		};
+		5A308C9F243C8A660035106E /* FriendListTests */ = {
+			isa = PBXGroup;
+			children = (
+				5A308CA8243C94940035106E /* Mocks */,
+				5A308CAF243CA1240035106E /* Repositories */,
+				5A308CA7243C94850035106E /* Model */,
+				5A308CA0243C8A980035106E /* ViewModel */,
+			);
+			path = FriendListTests;
+			sourceTree = "<group>";
+		};
+		5A308CA0243C8A980035106E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				5A308CA1243C8ACF0035106E /* FriendListViewModelTests.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		5A308CA7243C94850035106E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5A308CA9243C94CD0035106E /* FriendListModelTests.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5A308CA8243C94940035106E /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				5A308CA3243C8B3A0035106E /* MockFriendsListView.swift */,
+				5A308CA5243C8B620035106E /* MockFiendsListModel.swift */,
+				5A308CAB243C94F20035106E /* MockFriendListViewModel.swift */,
+				5A308CAD243C95000035106E /* MockFriendListAPIRepo.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		5A308CAF243CA1240035106E /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				5A308CB0243CA1570035106E /* FriendListAPIRepoTest.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
 		5A6F5787242A0F8D009190FA /* GameViewTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -175,6 +243,7 @@
 		607FACE81AFB9204008FA782 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				5A308C9E243C8A080035106E /* FriendTests */,
 				5A6F57B5242DD625009190FA /* CommonFiles_Tests-Bridging-Header.h */,
 				5A6F57AF242DD0C5009190FA /* GameTests */,
 				5A6F5787242A0F8D009190FA /* GameViewTests */,
@@ -336,16 +405,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A308CAE243C95000035106E /* MockFriendListAPIRepo.swift in Sources */,
+				5A308CA4243C8B3A0035106E /* MockFriendsListView.swift in Sources */,
 				5A6F5799242A0F8D009190FA /* XCTestCaseExtensions.swift in Sources */,
+				5A308CAC243C94F20035106E /* MockFriendListViewModel.swift in Sources */,
 				5A6F5795242A0F8D009190FA /* MockGameView.swift in Sources */,
 				5A6F5796242A0F8D009190FA /* MockGameModel.swift in Sources */,
+				5A308CA6243C8B620035106E /* MockFiendsListModel.swift in Sources */,
+				5A308CA2243C8ACF0035106E /* FriendListViewModelTests.swift in Sources */,
 				5A6F57B4242DD4F4009190FA /* MockGameDetailsLoadedType.swift in Sources */,
 				5A6F579C242A0F8D009190FA /* LoginTest.swift in Sources */,
 				5A6F579A242A0F8D009190FA /* LoginModelTest.swift in Sources */,
 				5A6F5798242A0F8D009190FA /* ServiceCallerTest.swift in Sources */,
 				5A6F57C3242DF747009190FA /* GameModelTests.swift in Sources */,
+				5A308CB1243CA1570035106E /* FriendListAPIRepoTest.swift in Sources */,
 				5A6F57B9242DD73E009190FA /* GameDetailsViewModelTests.swift in Sources */,
 				5A6F5797242A0F8D009190FA /* GameDataViewModelTest.swift in Sources */,
+				5A308CAA243C94CD0035106E /* FriendListModelTests.swift in Sources */,
 				5A6F57B1242DD0EC009190FA /* GameClassTest.swift in Sources */,
 				5A6F57C1242DF6B0009190FA /* MockGameViewModel.swift in Sources */,
 				5A6F579B242A0F8D009190FA /* MockLoginView.swift in Sources */,
