@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum UserStatus: String{
+public enum UserStatus: String {
   
   case online = "Online"
   case offline = "Offline"

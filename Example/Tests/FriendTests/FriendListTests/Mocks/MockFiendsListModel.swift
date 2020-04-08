@@ -11,7 +11,7 @@ import CommonFiles
 
 class MockFriendsListModel: FriendListModelType {
   
-  var observers: [String : FriendListModelObserver] = [:]
+  var observers: [String: FriendListModelObserver] = [:]
   var friendList: [User] = []
   
   init() {

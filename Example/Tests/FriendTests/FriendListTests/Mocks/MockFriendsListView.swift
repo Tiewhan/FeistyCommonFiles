@@ -11,7 +11,7 @@ import CommonFiles
 
 class MockFriendsListView: FriendListViewType {
   
-  var isDataLoaded = false;
+  var isDataLoaded = false
   var isErrorLoadingData = false
   
   func dataLoaded() {

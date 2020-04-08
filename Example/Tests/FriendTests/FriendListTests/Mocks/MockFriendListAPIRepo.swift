@@ -11,7 +11,7 @@ import CommonFiles
 
 class MockFriendListAPIRepo: FriendListRepositoryType {
   
-  var observers: [String : FriendListRepoObserver] = [:]
+  var observers: [String: FriendListRepoObserver] = [:]
   
   func getFriendListData(using serviceCaller: ServiceCaller) {
     

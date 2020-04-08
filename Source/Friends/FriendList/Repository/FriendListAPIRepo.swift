@@ -7,13 +7,13 @@
 
 import Foundation
 
-fileprivate struct jsonFriendList : Codable{
+private struct JSONFriendList: Codable {
   
-  let users: [jsonFriend]
+  let users: [JSONFriend]
   
 }
 
-fileprivate struct jsonFriend: Codable {
+private struct JSONFriend: Codable {
   
   let userID: String
   let username: String
@@ -31,9 +31,9 @@ fileprivate struct jsonFriend: Codable {
 
 public class FriendListAPIRepo {
   
-  public var observers: [String : FriendListRepoObserver] = [:]
+  public var observers: [String: FriendListRepoObserver] = [:]
   
-  public init(){ }
+  public init() { }
   
 }
 
@@ -83,11 +83,11 @@ extension FriendListAPIRepo: FriendListRepositoryType {
     
   }
   
-  private func decodeFriendList(data: Data) -> [User]{
+  private func decodeFriendList(data: Data) -> [User] {
     
     var friendList: [User] = []
     
-    if let decodedFriends = try? JSONDecoder().decode(jsonFriendList.self, from: data) {
+    if let decodedFriends = try? JSONDecoder().decode(JSONFriendList.self, from: data) {
       
       decodedFriends.users.forEach { friend in
         

@@ -7,10 +7,9 @@
 
 import Foundation
 
-
 public class FriendListModel {
   
-  public var observers: [String : FriendListModelObserver] = [:]
+  public var observers: [String: FriendListModelObserver] = [:]
   
   private let repo: FriendListRepositoryType
   private var friendList: [User] = []

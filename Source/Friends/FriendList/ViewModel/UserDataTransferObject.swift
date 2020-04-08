@@ -13,7 +13,7 @@ public struct UserDataTransferObject {
   public let username: String
   public let status: String
   
-  public static func mapToDTO(of user: User) -> UserDataTransferObject{
+  public static func mapToDTO(of user: User) -> UserDataTransferObject {
     
     return UserDataTransferObject(userID: user.userID, username: user.username, status: user.status.rawValue)
     

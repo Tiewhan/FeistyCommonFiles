@@ -29,7 +29,7 @@ public class FriendListViewModel {
 
 extension FriendListViewModel: FriendListViewModelType {
   
-  public func getFriend(at index: Int) -> UserDataTransferObject{
+  public func getFriend(at index: Int) -> UserDataTransferObject {
     return UserDataTransferObject.mapToDTO(of: model.getFriend(at: index))
   }
   
