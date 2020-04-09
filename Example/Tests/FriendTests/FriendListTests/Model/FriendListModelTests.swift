@@ -23,12 +23,6 @@ class FriendListModelTests: XCTestCase {
     
   }
   
-//  func getFriendList()
-//
-//  func getAmountOfFriends() -> Int
-//
-//  func getFriend(at index: Int) -> User
-  
   func testGivenSuccessfulFriendListCallWhenGetFriendListIsCalledThenLoadDataAndTriggerEventToViewModel() {
     
     systemUnderTest.subscribeToFriendListModel(with: mockViewModel, andID: mockViewModel.observerID)
