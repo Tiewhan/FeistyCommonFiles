@@ -7,10 +7,6 @@
 
 import Foundation
 
-struct LoginPaths {
-  static let loginPath = "http://localhost:8080/login"
-}
-
 private struct JSONLoginResult: Codable {
   let can_login: Bool
 }
@@ -38,7 +34,7 @@ extension LoginAPIRepo: LoginRepositoryType {
                            andPassword password: String,
                            using serviceCaller: ServiceCaller) {
     
-    guard let url = URL(string: LoginPaths.loginPath) else {
+    guard let url = URL(string: FeistyAPIURLComponents.loginURL) else {
       return
     }
     

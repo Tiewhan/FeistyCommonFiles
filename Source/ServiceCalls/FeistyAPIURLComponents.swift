@@ -9,14 +9,15 @@ import Foundation
 
 struct FeistyAPIURLComponents {
   
-  static let httpProtocol = "http://"
-  static let domainName = "localhost"
-  static let portNumber = ":8080"
+  private static let httpProtocol = "https://"
+  private static let domainName = "feisty-server.herokuapp.com"
   
-  static let friendsPath = "friends"
+  private static let friendsPath = "friends"
+  private static let loginPath = "login"
   
-  static let protocolAndHostName = httpProtocol + domainName + portNumber
+  private static let protocolAndHostName = httpProtocol + domainName
   
   static let getFriendList = "\(protocolAndHostName)/\(friendsPath)"
+  static let loginURL = "\(protocolAndHostName)/\(loginPath)"
   
 }
