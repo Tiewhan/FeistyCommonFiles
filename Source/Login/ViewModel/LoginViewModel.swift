@@ -12,27 +12,30 @@ import FirebaseAnalytics
 public class LoginViewModel {
   
   private weak var view: LoginType?
+  private var model: LoginModelType
   
-  public init(withView view: LoginType) {
+  public init(withView view: LoginType, andWithModel model: LoginModelType = LoginModel()) {
     self.view = view
+    self.model = model
+    
+    model.subscribeToLoginModel(withSubscriber: self)
   }
   
-  /**
-   Call on the LoginModel to attempt a login with the given details.
-   Calls authenticationSuccess() on the ViewModel view if successful
-   Calls authenticationFailure() on the ViewModel view if failed
-   
-   - Parameters:
-    - userName: The username of the user
-    - password: The password of the user
-   */
+}
+
+extension LoginViewModel: LoginViewModelType {
+  
   public func attemptLogin(with userName: String, and password: String) {
+    model.attemptLogin(with: userName, and: password)
+  }
+  
+}
+
+extension LoginViewModel: LoginModelObserver {
+  
+  public func authenticationAttemptFinished(withResult result: Bool) {
     
-    let model = LoginModel()
-    
-    let loggedIn = model.attemptLogin(with: userName, and: password)
-    
-    if loggedIn {
+    if result == true {
       view?.authenticationSuccess()
       Analytics.logEvent(AnalyticsEventLogin, parameters: [:])
     } else {
