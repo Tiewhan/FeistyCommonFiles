@@ -11,7 +11,8 @@ import CommonFiles
 
 class MockFriendsListModel: FriendListModelType {
   
-  var observers: [String: FriendListModelObserver] = [:]
+  weak var observer: FriendListModelObserver?
+  
   var friendList: [User] = []
   
   init() {
@@ -25,17 +26,11 @@ class MockFriendsListModel: FriendListModelType {
   }
   
   func getFriendList() {
-    observers.forEach { observer in
-      observer.value.friendListFound()
-    }
+    observer?.friendListFound()
   }
   
   func triggerListNotFound() {
-    
-    observers.forEach { observer in
-      observer.value.friendListNotFound()
-    }
-    
+    observer?.friendListNotFound()
   }
   
   func getAmountOfFriends() -> Int {
@@ -51,12 +46,12 @@ class MockFriendsListModel: FriendListModelType {
     
   }
   
-  func subscribeToFriendListModel(with subscriber: FriendListModelObserver, andID observerID: String) {
-    observers[observerID] = subscriber
+  func subscribeToModel(with subscriber: FriendListModelObserver) {
+    observer = subscriber
   }
   
-  func unsubscribeFromFriendListModel(withID observerID: String) {
-    observers.removeValue(forKey: observerID)
+  func unsubscribeFromModel() {
+    observer = nil
   }
   
 }

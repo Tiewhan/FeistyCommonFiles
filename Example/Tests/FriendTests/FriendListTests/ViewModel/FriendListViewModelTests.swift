@@ -56,7 +56,7 @@ class FriendListViewModelTests: XCTestCase {
   
   func testGivenInstructionToStartLoadWhenViewModelConstructorIsCalledAndPassedThenCallbackForDataLoadedCalled() {
     
-    mockModel.subscribeToFriendListModel(with: systemUnderTest, andID: systemUnderTest.observerID)
+    mockModel.subscribeToModel(with: systemUnderTest)
     mockModel.getFriendList()
     
     let result = mockView.isDataLoaded
@@ -67,7 +67,7 @@ class FriendListViewModelTests: XCTestCase {
   
   func testGivenInstructionToStartLoadWhenViewModelConstructorIsCalledAndFailedThenCallbackForDataNotLoadedCalled() {
     
-    mockModel.subscribeToFriendListModel(with: systemUnderTest, andID: systemUnderTest.observerID)
+    mockModel.subscribeToModel(with: systemUnderTest)
     mockModel.triggerListNotFound()
     
     let result = mockView.isDataLoaded

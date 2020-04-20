@@ -13,6 +13,7 @@ class MockFriendsListView: FriendListViewType {
   
   var isDataLoaded = false
   var isErrorLoadingData = false
+  var isImageFound = false
   
   func dataLoaded() {
     isDataLoaded = true
@@ -21,5 +22,9 @@ class MockFriendsListView: FriendListViewType {
   func errorLoadingData() {
     isErrorLoadingData = true
   }
-
+  
+  func foundImageOfCell(at index: Int, image: UIImage?) {
+    isImageFound = true
+  }
+  
 }

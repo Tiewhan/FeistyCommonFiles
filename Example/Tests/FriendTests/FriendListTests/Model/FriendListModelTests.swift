@@ -14,18 +14,21 @@ class FriendListModelTests: XCTestCase {
   var systemUnderTest: FriendListModel!
   var mockViewModel: MockFriendListViewModel!
   var mockAPIRepo: MockFriendListAPIRepo!
+  var mockImageAPIRepo: MockFriendImageAPIRepo!
   
   override func setUp() {
     
     mockViewModel = MockFriendListViewModel()
     mockAPIRepo = MockFriendListAPIRepo()
-    systemUnderTest = FriendListModel(withRepo: mockAPIRepo)
+    mockImageAPIRepo = MockFriendImageAPIRepo()
+    systemUnderTest = FriendListModel(withRepo: mockAPIRepo,
+                                      andImageRepo: mockImageAPIRepo)
     
   }
   
   func testGivenSuccessfulFriendListCallWhenGetFriendListIsCalledThenLoadDataAndTriggerEventToViewModel() {
     
-    systemUnderTest.subscribeToFriendListModel(with: mockViewModel, andID: mockViewModel.observerID)
+    systemUnderTest.subscribeToModel(with: mockViewModel)
     
     let expectedListSize = 5
     systemUnderTest.getFriendList()
@@ -37,7 +40,7 @@ class FriendListModelTests: XCTestCase {
   
   func testGivenNegativeFriendListCallWhenGetFriendListIsCalledThenLoadDataAndTriggerEventToViewModel() {
     
-    systemUnderTest.subscribeToFriendListModel(with: mockViewModel, andID: mockViewModel.observerID)
+    systemUnderTest.subscribeToModel(with: mockViewModel)
     
     mockAPIRepo.triggerDataFailedToLoad()
     
@@ -84,11 +87,11 @@ class FriendListModelTests: XCTestCase {
   
   func testSubscribeToFriendListModel() {
     
-    let expectedResult = 1
+    let expectedResult = true
     
-    systemUnderTest.subscribeToFriendListModel(with: mockViewModel, andID: mockViewModel.observerID)
+    systemUnderTest.subscribeToModel(with: mockViewModel)
     
-    let result = systemUnderTest.observers.count
+    let result = systemUnderTest.observer != nil
     
     XCTAssertTrue(result == expectedResult)
     
@@ -96,18 +99,17 @@ class FriendListModelTests: XCTestCase {
   
   func testUnsubscribeFromFriendListModel() {
     
-    var expectedResult = 1
+    let expectedResult = true
     
-    systemUnderTest.subscribeToFriendListModel(with: mockViewModel, andID: mockViewModel.observerID)
+    systemUnderTest.subscribeToModel(with: mockViewModel)
     
-    var result = systemUnderTest.observers.count
+    var result = systemUnderTest.observer != nil
     
-    XCTAssertTrue(result == 1)
+    XCTAssertTrue(result == expectedResult)
     
-    systemUnderTest.unsubscribeFromFriendListModel(withID: mockViewModel.observerID)
+    systemUnderTest.unsubscribeFromModel()
     
-    expectedResult = 0
-    result = systemUnderTest.observers.count
+    result = systemUnderTest.observer == nil
     
     XCTAssertTrue(result == expectedResult)
     
