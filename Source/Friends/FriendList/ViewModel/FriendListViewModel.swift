@@ -16,7 +16,7 @@ public class FriendListViewModel {
     self.view = view
     self.model = model
     
-    self.model.subscribeToFriendListModel(with: self, andID: observerID)
+    self.model.subscribeToModel(with: self)
     self.model.getFriendList()
     
   }
@@ -41,8 +41,8 @@ extension FriendListViewModel: FriendListViewModelType {
 
 extension FriendListViewModel: FriendListModelObserver {
   
-  public var observerID: String {
-    return "FriendListViewModelObserver"
+  public func foundProfileImage(of user: User, atIndex index: Int) {
+    view?.foundImageOfCell(at: index, image: user.profileImage)
   }
   
   public func friendListNotFound() {
