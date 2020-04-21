@@ -11,7 +11,7 @@ import CommonFiles
 
 class MockFriendListAPIRepo: FriendListRepositoryType {
   
-  var observers: [String: FriendListRepoObserver] = [:]
+  weak var observer: FriendListRepoObserver?
   
   func getFriendListData(using serviceCaller: ServiceCaller) {
     
@@ -23,24 +23,20 @@ class MockFriendListAPIRepo: FriendListRepositoryType {
     friendList.append(User(withUserID: "71", andUsername: "Dasher", andStatus: .offline))
     friendList.append(User(withUserID: "81", andUsername: "Pter", andStatus: .online))
     
-    observers.forEach { observer in
-      observer.value.friendsListRetrieved(withData: friendList)
-    }
+    observer?.friendsListRetrieved(withData: friendList)
     
   }
   
   func triggerDataFailedToLoad() {
-    observers.forEach { observer in
-      observer.value.failedToLoadFriends()
-    }
+      observer?.failedToLoadFriends()
   }
   
-  func subscribeToFriendListModel(with subscriber: FriendListRepoObserver, andID observerID: String) {
-    observers[observerID] = subscriber
+  func subscribeToRepository(with subscriber: FriendListRepoObserver) {
+    observer = subscriber
   }
   
-  func unsubscribeFromFriendListModel(withID observerID: String) {
-    observers.removeValue(forKey: observerID)
+  func unsubscribeFromRepository() {
+    observer = nil
   }
   
 }

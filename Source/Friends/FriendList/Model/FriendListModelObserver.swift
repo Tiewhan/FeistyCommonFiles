@@ -7,12 +7,12 @@
 
 import Foundation
 
-public protocol FriendListModelObserver {
-  
-  var observerID: String { get }
+public protocol FriendListModelObserver: AnyObject {
   
   func friendListFound()
   
   func friendListNotFound()
+  
+  func foundProfileImage(of user: User, atIndex index: Int)
   
 }

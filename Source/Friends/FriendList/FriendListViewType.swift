@@ -13,4 +13,6 @@ public protocol FriendListViewType: AnyObject {
   
   func errorLoadingData()
   
+  func foundImageOfCell(at index: Int, image: UIImage?)
+  
 }

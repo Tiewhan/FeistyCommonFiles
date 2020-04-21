@@ -9,10 +9,10 @@ import Foundation
 
 public protocol FriendListModelObservable {
   
-  var observers: [String: FriendListModelObserver] { get set }
+  var observer: FriendListModelObserver? { get }
   
-  func subscribeToFriendListModel(with subscriber: FriendListModelObserver, andID observerID: String)
+  func subscribeToModel(with subscriber: FriendListModelObserver)
   
-  func unsubscribeFromFriendListModel(withID observerID: String)
+  func unsubscribeFromModel()
   
 }

@@ -20,6 +20,7 @@ public class User {
   let userID: String
   var username: String
   var status: UserStatus
+  var profileImage: UIImage?
   
   public static var defaultValue: User {
     return User(withUserID: "N/A", andUsername: "No Username", andStatus: .offline)
@@ -30,6 +31,7 @@ public class User {
     self.userID = userID
     self.username = username
     self.status = status
+    self.profileImage = nil
     
   }
   

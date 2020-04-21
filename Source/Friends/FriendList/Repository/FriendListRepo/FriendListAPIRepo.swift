@@ -31,7 +31,7 @@ private struct JSONFriend: Codable {
 
 public class FriendListAPIRepo {
   
-  public var observers: [String: FriendListRepoObserver] = [:]
+  public weak var observer: FriendListRepoObserver?
   
   public init() { }
   
@@ -39,12 +39,12 @@ public class FriendListAPIRepo {
 
 extension FriendListAPIRepo: FriendListRepositoryType {
   
-  public func subscribeToFriendListModel(with subscriber: FriendListRepoObserver, andID observerID: String) {
-    observers[observerID] = subscriber
+  public func subscribeToRepository(with subscriber: FriendListRepoObserver) {
+    observer = subscriber
   }
   
-  public func unsubscribeFromFriendListModel(withID observerID: String) {
-    observers.removeValue(forKey: observerID)
+  public func unsubscribeFromRepository() {
+    observer = nil
   }
   
   public func getFriendListData(using serviceCaller: ServiceCaller) {
@@ -61,17 +61,13 @@ extension FriendListAPIRepo: FriendListRepositoryType {
       
       let friendList = self.decodeFriendList(data: data)
       
-      self.observers.forEach { observer in
-        observer.value.friendsListRetrieved(withData: friendList)
-      }
+      self.observer?.friendsListRetrieved(withData: friendList)
       
     }
     
     serviceCaller.callFailed = { error in
       
-      self.observers.forEach { observer in
-        observer.value.failedToLoadFriends()
-      }
+      self.observer?.failedToLoadFriends()
       
     }
     

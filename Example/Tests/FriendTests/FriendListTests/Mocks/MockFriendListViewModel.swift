@@ -13,11 +13,13 @@ class MockFriendListViewModel: FriendListViewModelType {
   
   var isFriendListFound: Bool
   var isFriendListNotFound: Bool
+  var isProfileImageFound: Bool
   
   init() {
     
     isFriendListFound = false
     isFriendListNotFound = false
+    isProfileImageFound = false
     
   }
   
@@ -33,8 +35,8 @@ class MockFriendListViewModel: FriendListViewModelType {
 
 extension MockFriendListViewModel: FriendListModelObserver {
   
-  var observerID: String {
-    return "Mock_Friend_List_View-Model_Observer"
+  func foundProfileImage(of user: User, atIndex index: Int) {
+    isProfileImageFound = true
   }
   
   func friendListFound() {

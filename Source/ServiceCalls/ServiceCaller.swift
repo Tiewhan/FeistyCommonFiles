@@ -18,7 +18,7 @@ public enum SerivceCallerSetupError: Error, Equatable {
   case noCallFailedCallback
 }
 
-public struct DataBundleKeys {
+public struct ServiceCallerDataBundleKeys {
   static let postParameters: String = "parameters"
 }
 
@@ -26,6 +26,7 @@ public class ServiceCaller {
   
   public var callSucceeded: ((Data, DataBundle) -> Void)?
   public var callFailed: ((ServiceCallError) -> Void)?
+  public var callFailedWithData: ((ServiceCallError, DataBundle) -> Void)?
   
   public func makeServiceCall(with url: URL,
                               and dataBundle: DataBundle,
@@ -40,6 +41,7 @@ public class ServiceCaller {
       if error != nil {
         
         self.callFailed?(.generalError)
+        self.callFailedWithData?(.generalError, dataBundle)
         return
         
       }
@@ -47,6 +49,7 @@ public class ServiceCaller {
       guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
         
         self.callFailed?(.malformedRequest)
+        self.callFailedWithData?(.malformedRequest, dataBundle)
         return
         
       }
@@ -55,6 +58,7 @@ public class ServiceCaller {
         self.callSucceeded?(data, dataBundle)
       } else {
         self.callFailed?(.noDataAvailable)
+        self.callFailedWithData?(.noDataAvailable, dataBundle)
       }
       
     }
@@ -83,9 +87,9 @@ public class ServiceCaller {
     
     request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
     
-    let parameters: [String: Any] = data.extraData[DataBundleKeys.postParameters]
+    let parameters: [String: Any] = data.extraData[ServiceCallerDataBundleKeys.postParameters]
                                     as? [String: Any] ?? [:]
-    data.extraData.removeValue(forKey: DataBundleKeys.postParameters)
+    data.extraData.removeValue(forKey: ServiceCallerDataBundleKeys.postParameters)
     
     request.httpBody = parameters.percentEncoded()
     
@@ -97,7 +101,7 @@ public class ServiceCaller {
       throw SerivceCallerSetupError.noCallSucceededCallback
     }
     
-    guard callFailed != nil else {
+    guard (callFailed != nil) || (callFailedWithData != nil) else {
       throw SerivceCallerSetupError.noCallFailedCallback
     }
     
@@ -107,6 +111,7 @@ public class ServiceCaller {
     
     callSucceeded = nil
     callFailed = nil
+    callFailedWithData = nil
     
   }
   

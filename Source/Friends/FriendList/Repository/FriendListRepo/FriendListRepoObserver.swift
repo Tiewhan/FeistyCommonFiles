@@ -7,9 +7,7 @@
 
 import Foundation
 
-public protocol FriendListRepoObserver {
-  
-  var observerID: String { get }
+public protocol FriendListRepoObserver: AnyObject {
   
   func friendsListRetrieved(withData data: [User])
   

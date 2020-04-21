@@ -9,15 +9,19 @@ import Foundation
 
 public class FriendListModel {
   
-  public var observers: [String: FriendListModelObserver] = [:]
+  public weak var observer: FriendListModelObserver?
   
   private let repo: FriendListRepositoryType
+  private let imageRepo: FriendImageRepositoryType
   private var friendList: [User] = []
   
-  public init(withRepo repo: FriendListRepositoryType) {
+  public init(withRepo repo: FriendListRepositoryType,
+              andImageRepo imageRepo: FriendImageRepositoryType) {
     self.repo = repo
+    self.imageRepo = imageRepo
     
-    self.repo.subscribeToFriendListModel(with: self, andID: observerID)
+    self.repo.subscribeToRepository(with: self)
+    self.imageRepo.subscribeToRepository(with: self)
     
   }
   
@@ -33,12 +37,13 @@ extension FriendListModel: FriendListModelType {
     return friendList[index]
     
   }
-    public func subscribeToFriendListModel(with subscriber: FriendListModelObserver, andID observerID: String) {
-    observers[observerID] = subscriber
+  
+  public func subscribeToModel(with subscriber: FriendListModelObserver) {
+    observer = subscriber
   }
   
-  public func unsubscribeFromFriendListModel(withID observerID: String) {
-    observers.removeValue(forKey: observerID)
+  public func unsubscribeFromModel() {
+    observer = nil
   }
   
   public func getFriendList() {
@@ -53,26 +58,38 @@ extension FriendListModel: FriendListModelType {
 
 extension FriendListModel: FriendListRepoObserver {
   
-  public var observerID: String {
-    return "FriendListModelObserver"
-  }
-  
   public func friendsListRetrieved(withData data: [User]) {
-    
     friendList = data
+    observer?.friendListFound()
     
-    observers.forEach { observer in
-      observer.value.friendListFound()
+    friendList.forEach { friend in
+      imageRepo.findProfileImage(of: friend, using: ServiceCaller())
     }
     
   }
   
   public func failedToLoadFriends() {
+    observer?.friendListNotFound()
+  }
+  
+}
+
+extension FriendListModel: FriendImageRepoObserver {
+  
+  public func foundImageOf(user: User) {
     
-    observers.forEach { observer in
-      observer.value.friendListNotFound()
+    for index in 0..<friendList.count {
+      
+      if friendList[index].userID == user.userID {
+        observer?.foundProfileImage(of: user, atIndex: index)
+      }
+      
     }
     
+  }
+  
+  public func errorInGettingImageOf(user: User) {
+    foundImageOf(user: user)
   }
   
 }
