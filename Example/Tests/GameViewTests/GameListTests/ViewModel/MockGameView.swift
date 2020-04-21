@@ -12,9 +12,14 @@ import Foundation
 class MockGameView: GameDataLoadedType {
   
   var gameDataLoaded: Bool = false
+  var isHeaderImageLoaded: Bool = false
   
   func gameDataSuccessfullyLoaded(with data: [Game]) {
     gameDataLoaded = true
+  }
+  
+  func headerImageLoadedForGame(at index: Int, withImage image: UIImage?) {
+    isHeaderImageLoaded = true
   }
   
 }
