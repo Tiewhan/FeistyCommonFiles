@@ -32,11 +32,14 @@ public class GameDataViewModel {
    
    - Returns: A tuple of the necessary details for the view to display.
    */
-  public func getGameDetails(at index: Int) -> (gameName: String, gamePrice: String) {
+  public func getGameDetails(at index: Int) ->
+    (gameName: String, gamePrice: String, gameHeader: UIImage?) {
     
     let game = model.getGameAt(index: index)
     
-    let gameDetails = (gameName: game.name, gamePrice: "R\(game.price)")
+    let gameDetails = (gameName: game.name,
+                       gamePrice: "R\(game.price)",
+                       gameHeader: game.headerImage)
     
     return gameDetails
     
@@ -61,6 +64,10 @@ public class GameDataViewModel {
 
 ///Extends the View Model with the GameManagerObserver to react to games finished being loaded
 extension GameDataViewModel: GameModelObserver {
+  
+  public func headerImageLoadedFor(game: Game, at index: Int) {
+    view?.headerImageLoadedForGame(at: index, withImage: game.headerImage)
+  }
   
   public func gamesFinishedLoading() {
     
