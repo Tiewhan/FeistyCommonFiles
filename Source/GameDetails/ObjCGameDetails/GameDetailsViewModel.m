@@ -40,6 +40,7 @@
   NSString* shortDescription = self.selectedGame.shortDescription;
   NSString* developers = @"";   
   NSString* publishers = @"";
+  UIImage* headerImage = self.selectedGame.headerImage;
   
   for (id developer in self.selectedGame.developers) {
     developers = [developers stringByAppendingString:developer];
@@ -49,7 +50,13 @@
     publishers = [publishers stringByAppendingString:publisher];
   }
   
-  [self.view gameDetailsFound:gameName :appID :price :shortDescription :developers :publishers];
+  [self.view gameDetailsFound:gameName
+                             :appID
+                             :price
+                             :shortDescription
+                             :developers
+                             :publishers
+                             :headerImage];
   
 }
 

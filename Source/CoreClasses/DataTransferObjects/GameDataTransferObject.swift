@@ -13,8 +13,9 @@ public struct GameDataTransferObject {
   public var name: String
   public var price: String
   public var shortDescription: String
-  public var developers:Array<String> = []
-  public var publishers:Array<String> = []
+  public var developers: Array<String> = []
+  public var publishers: Array<String> = []
+  public var headerImage: UIImage?
   
   public static func mapToDTO(of game: Game) -> GameDataTransferObject {
     
@@ -25,7 +26,8 @@ public struct GameDataTransferObject {
                                   price: price,
                                   shortDescription: game.shortDescription,
                                   developers: game.developers,
-                                  publishers: game.publishers)
+                                  publishers: game.publishers,
+                                  headerImage: game.headerImage)
     
   }
   
