@@ -42,7 +42,7 @@ extension GameImageAPIRepo: GameImageRepositoryType {
       let game = dataBundle.extraData[DataBundleKeys.game] as? Game ?? Game.defaultValue
       let image = UIImage(data: data)
       
-      game.headerImage = image ?? Game.defaultHeaderImage
+      game.headerImage = image
       
       self.observer?.imageFoundFor(game: game)
       

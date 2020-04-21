@@ -17,7 +17,7 @@ public class Game: NSObject {
   @objc public var developers: Array<String> = []
   @objc public var publishers: Array<String> = []
   @objc public var headerImagePath: String
-  @objc public var headerImage: UIImage = Game.defaultHeaderImage
+  @objc public var headerImage: UIImage?
   
   public static var defaultValue: Game {
     
@@ -30,8 +30,6 @@ public class Game: NSObject {
     
   }
   
-  public static var defaultHeaderImage: UIImage = #imageLiteral(resourceName: "Game Tab Bar Icon")
-
   @objc public init(gameName name: String,
                     gamePrice price: Double,
                     shortDescription: String = "",
