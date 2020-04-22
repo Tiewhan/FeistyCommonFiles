@@ -10,6 +10,5 @@ import Foundation
 public protocol GameRepository: GameRepositoryObservable {
   
   func getGameList(with serviceCaller: ServiceCaller)
-  func getGameDetails(of gameList: [Game], with serviceCaller: ServiceCaller)
   
 }
