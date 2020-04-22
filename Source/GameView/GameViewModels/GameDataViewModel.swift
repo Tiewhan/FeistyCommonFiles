@@ -11,7 +11,6 @@ import Foundation
 ///The class represents the data of the ViewModel and delegates work between the View and the Model
 public class GameDataViewModel {
   
-  public var observerID: String = "GameDataViewModelSubscriber"
   private weak var view: GameDataLoadedType?
   private var model: GameModelProtocol
   
@@ -19,7 +18,7 @@ public class GameDataViewModel {
     self.view = view
     self.model = model
     
-    model.subscribeToGameModelGamesLoaded(subscriber: self, subscriberID: observerID)
+    model.subscribeToModel(subscriber: self)
     model.loadData()
     
   }
@@ -32,11 +31,14 @@ public class GameDataViewModel {
    
    - Returns: A tuple of the necessary details for the view to display.
    */
-  public func getGameDetails(at index: Int) -> (gameName: String, gamePrice: String) {
+  public func getGameDetails(at index: Int) ->
+    (gameName: String, gamePrice: String, gameHeader: UIImage?) {
     
     let game = model.getGameAt(index: index)
     
-    let gameDetails = (gameName: game.name, gamePrice: "R\(game.price)")
+    let gameDetails = (gameName: game.name,
+                       gamePrice: "R\(game.price)",
+                       gameHeader: game.headerImage)
     
     return gameDetails
     
@@ -62,10 +64,12 @@ public class GameDataViewModel {
 ///Extends the View Model with the GameManagerObserver to react to games finished being loaded
 extension GameDataViewModel: GameModelObserver {
   
+  public func headerImageLoadedFor(game: Game, at index: Int) {
+    view?.headerImageLoadedForGame(at: index, withImage: game.headerImage)
+  }
+  
   public func gamesFinishedLoading() {
-    
     view?.gameDataSuccessfullyLoaded(with: model.gameList)
-    
   }
   
 }

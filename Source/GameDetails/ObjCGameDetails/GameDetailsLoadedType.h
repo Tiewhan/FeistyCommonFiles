@@ -15,7 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
                         : (NSString *) price
                         : (NSString *) shortDescription
                         : (NSString *) developers
-                        : (NSString *) publishers;
+                        : (NSString *) publishers
+                        : (UIImage * _Nullable)  headerImage;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -7,30 +7,28 @@
 
 import Foundation
 
-private struct JSONFriendList: Codable {
-  
-  let users: [JSONFriend]
-  
-}
+public class FriendListAPIRepo {
 
-private struct JSONFriend: Codable {
-  
-  let userID: String
-  let username: String
-  let status: String
-  
-  private enum CodingKeys: String, CodingKey {
+  struct JSONFriendList: Codable {
+    let users: [JSONFriend]
+  }
+
+  struct JSONFriend: Codable {
     
-    case userID = "user_id"
-    case username
-    case status
+    let userID: String
+    let username: String
+    let status: String
+    
+    private enum CodingKeys: String, CodingKey {
+      
+      case userID = "user_id"
+      case username
+      case status
+      
+    }
     
   }
-  
-}
 
-public class FriendListAPIRepo {
-  
   public weak var observer: FriendListRepoObserver?
   
   public init() { }
@@ -60,22 +58,17 @@ extension FriendListAPIRepo: FriendListRepositoryType {
     serviceCaller.callSucceeded = { data, dataBundle in
       
       let friendList = self.decodeFriendList(data: data)
-      
       self.observer?.friendsListRetrieved(withData: friendList)
       
     }
     
     serviceCaller.callFailed = { error in
-      
       self.observer?.failedToLoadFriends()
-      
     }
     
     do {
       try serviceCaller.makeServiceCall(with: friendsURL, and: dataBundle)
-    } catch {
-      
-    }
+    } catch { }
     
   }
   

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol LoginModelObserver {
+public protocol LoginModelObserver: AnyObject {
   
   func authenticationAttemptFinished(withResult result: Bool)
   

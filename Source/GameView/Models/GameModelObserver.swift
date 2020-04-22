@@ -8,7 +8,9 @@
 
 import Foundation
 
-public protocol GameModelObserver {
-    var observerID: String { get set }
-    func gamesFinishedLoading()
+public protocol GameModelObserver: AnyObject {
+  
+  func gamesFinishedLoading()
+  func headerImageLoadedFor(game: Game, at index: Int)
+  
 }

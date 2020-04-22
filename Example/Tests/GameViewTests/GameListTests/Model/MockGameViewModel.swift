@@ -12,9 +12,14 @@ import CommonFiles
 class MockGameViewModel {
   var observerID: String = ""
   var gamesFinishedLoadingCalled = false
+  var isHeaderImageLoaded = false
 }
 
 extension MockGameViewModel: GameModelObserver {
+  
+  func headerImageLoadedFor(game: Game, at index: Int) {
+    isHeaderImageLoaded = true
+  }
   
   func gamesFinishedLoading() {
     gamesFinishedLoadingCalled = gamesFinishedLoadingCalled ? false : true

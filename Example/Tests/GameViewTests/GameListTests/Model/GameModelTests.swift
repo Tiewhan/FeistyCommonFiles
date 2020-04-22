@@ -13,14 +13,16 @@ class GameModelTests: XCTestCase {
 
   var mockGameRepo: MockGameRepo!
   var mockGameViewModel: MockGameViewModel!
+  var mockGameImageRepo: MockGameImageRepo!
   var systemUnderTest: GameModel!
   
     override func setUp() {
         
       mockGameRepo = MockGameRepo()
       mockGameViewModel = MockGameViewModel()
+      mockGameImageRepo = MockGameImageRepo()
       
-      systemUnderTest = GameModel(mockGameRepo)
+      systemUnderTest = GameModel(mockGameRepo, andImageRepo: mockGameImageRepo)
       systemUnderTest.loadData()
       
     }
@@ -69,21 +71,21 @@ class GameModelTests: XCTestCase {
   
   func testGameModelGamesLoadedSubscription() {
     
-    systemUnderTest.subscribeToGameModelGamesLoaded(subscriber: mockGameViewModel, subscriberID: "Mock View Model")
+    systemUnderTest.subscribeToModel(subscriber: mockGameViewModel)
     systemUnderTest.loadData()
-    
+     
     XCTAssertTrue(mockGameViewModel.gamesFinishedLoadingCalled)
     
   }
   
   func testGameModelGamesLoadedUnsubscribe() {
     
-    systemUnderTest.subscribeToGameModelGamesLoaded(subscriber: mockGameViewModel, subscriberID: "Mock View Model")
+    systemUnderTest.subscribeToModel(subscriber: mockGameViewModel)
     systemUnderTest.loadData()
     
     XCTAssertTrue(mockGameViewModel.gamesFinishedLoadingCalled)
     
-    systemUnderTest.unsubscribeFromGameModelGamesLoaded(subscriberID: "Mock View Model")
+    systemUnderTest.unsubscribeFromModel()
     systemUnderTest.loadData()
     
     XCTAssertTrue(mockGameViewModel.gamesFinishedLoadingCalled)

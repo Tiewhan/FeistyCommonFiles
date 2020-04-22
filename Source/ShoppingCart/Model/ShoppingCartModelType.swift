@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol ShoppingCartModelType {
+public protocol ShoppingCartModelType: AnyObject {
   
   func getAmountInCart() -> Int
   func getGame(at index: Int) -> Game

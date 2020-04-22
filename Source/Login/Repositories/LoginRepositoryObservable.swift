@@ -9,10 +9,10 @@ import Foundation
 
 public protocol LoginRepositoryObservable {
   
-  var observer: LoginRepositoryObserver? { get set }
+  var observer: LoginRepositoryObserver? { get }
   
   func subscribeToLoginRepository(withSubscriber subscriber: LoginRepositoryObserver)
   
-  func unsunscribeFromLoginRepositoruy()
+  func unsunscribeFromLoginRepository()
   
 }

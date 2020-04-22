@@ -12,23 +12,22 @@ import Foundation
 public class GameModel {
   
   private let repo: GameRepository
-  public var observerID: String = "GameModelObserver"
+  private let imageRepo: GameImageRepositoryType
+  public var gameList: [Game] = []
+  public weak var observer: GameModelObserver?
   
-  public init(_ repo: GameRepository) {
+  public init(_ repo: GameRepository,
+              andImageRepo imageRepo: GameImageRepositoryType) {
     self.repo = repo
+    self.imageRepo = imageRepo
     
-    repo.subscribeToGameRepoGamesLoaded(subscriber: self, subscriberID: observerID)
+    repo.subscribeToRepository(subscriber: self)
+    imageRepo.subscribeToRepository(withSubscriber: self)
     
   }
   
-  public var gameList: [Game] = []
-  
-  private var observers: [String: GameModelObserver] = [:]
-  
   private func notifyAllObservers() {
-    observers.forEach({ (observer) in
-      observer.value.gamesFinishedLoading()
-    })
+    observer?.gamesFinishedLoading()
   }
   
   private func loadGameDetails(of gameList: [Game]) {
@@ -50,20 +49,19 @@ extension GameModel: GameModelProtocol {
   public func getGameAt(index: Int) -> Game {
     
     if (index >= gameList.count) || (index <= -1) {
-      return Game(gameName: "No Game", gamePrice: 0.00)
+      return Game.defaultValue
     }
     
     return gameList[index]
     
   }
   
-  public func subscribeToGameModelGamesLoaded(subscriber observer: GameModelObserver,
-                                              subscriberID observerID: String) {
-    observers[observerID] = observer
+  public func subscribeToModel(subscriber observer: GameModelObserver) {
+    self.observer = observer
   }
 
-  public func unsubscribeFromGameModelGamesLoaded(subscriberID observerID: String) {
-    observers.removeValue(forKey: observerID)
+  public func unsubscribeFromModel() {
+    observer = nil
   }
 
 }
@@ -78,6 +76,37 @@ extension GameModel: GameRepositoryObserver {
   public func gameDetailsFinishedLoading(withData gameList: [Game]) {
     self.gameList = gameList
     notifyAllObservers()
+    loadHeaderImages()
+  }
+  
+  private func loadHeaderImages() {
+    
+    gameList.forEach { game in
+      imageRepo.getHeaderImageFor(game: game, using: ServiceCaller())
+    }
+    
+  }
+  
+}
+
+extension GameModel: GameImageRepoObserver {
+  
+  public func imageFoundFor(game: Game) {
+    notifyImageLoadedFor(game: game)
+  }
+  
+  public func failedToLoadImageFor(game: Game) { }
+  
+  private func notifyImageLoadedFor(game: Game) {
+    
+    for index in 0..<gameList.count {
+      
+      if gameList[index].appID == game.appID {
+        observer?.headerImageLoadedFor(game: game, at: index)
+        return
+      }
+      
+    }
   }
   
 }

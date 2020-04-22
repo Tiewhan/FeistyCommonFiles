@@ -42,18 +42,4 @@ class GameClassTest: XCTestCase {
     
   }
   
-  func testGivenGameWhenToStringIsCalledThenDisplayGameName() {
-    
-    let testPrice = 200.00
-    let testAppID = "5510256"
-    let testName = "Pirates of Las Angeles"
-    let systemUnderTest = Game(gameName: testName, gamePrice: testPrice)
-    systemUnderTest.appID = testAppID
-    
-    let result = systemUnderTest.toString()
-    
-    XCTAssert(result == testName)
-    
-  }
-  
 }

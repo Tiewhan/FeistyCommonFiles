@@ -14,8 +14,10 @@ public class Game: NSObject {
   @objc public var name: String
   @objc public var price: Double = 0.00
   @objc public var shortDescription: String
-  @objc public var developers:Array<String> = []
-  @objc public var publishers:Array<String> = []
+  @objc public var developers: Array<String> = []
+  @objc public var publishers: Array<String> = []
+  @objc public var headerImagePath: String
+  @objc public var headerImage: UIImage?
   
   public static var defaultValue: Game {
     
@@ -27,27 +29,31 @@ public class Game: NSObject {
     return game
     
   }
-
-  @objc public init(gameName name: String, gamePrice price: Double, shortDescription: String = "") {
+  
+  @objc public init(gameName name: String,
+                    gamePrice price: Double,
+                    shortDescription: String = "",
+                    headerImagePath: String = "") {
 
     self.name = name
     self.price = price
     appID = ""
     self.shortDescription = shortDescription
+    self.headerImagePath = headerImagePath
     
   }
 
-  @objc public init(appid: String, name: String, shortDescription: String = "") {
+  @objc public init(appid: String,
+                    name: String,
+                    shortDescription: String = "",
+                    headerImagePath: String = "") {
 
     appID = "\(appid)"
     self.name = name
     self.price = 0.00
     self.shortDescription = shortDescription
+    self.headerImagePath = headerImagePath
 
   }
 
-  public func toString() -> String {
-    return name
-  }
-  
 }

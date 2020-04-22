@@ -10,7 +10,7 @@ import Foundation
 
 public class LoginModel {
   
-  public var observer: LoginModelObserver?
+  public weak var observer: LoginModelObserver?
   private var repo: LoginRepositoryType
   
   public init(withRepo repo: LoginRepositoryType = LoginAPIRepo()) {

@@ -35,16 +35,15 @@ fileprivate struct gameDetailsJSONResponseKeys {
   static let shortDescription: String = "short_description"
   static let developers: String = "developers"
   static let publishers: String = "publishers"
+  static let headerImage: String = "header_image"
   
 }
 
 public class GameAPIRepo: GameRepository {
   
-  private var observers: [String: GameRepositoryObserver] = [:]
+  public weak var observer: GameRepositoryObserver?
   
-  public init() {
-    
-  }
+  public init() { }
   
   public func getGameList(with serviceCaller: ServiceCaller) {
 
@@ -211,6 +210,10 @@ public class GameAPIRepo: GameRepository {
       game.publishers = publishers
     }
     
+    if let headerImagePath = gameDetailsData[gameDetailsJSONResponseKeys.headerImage] as? String {
+      game.headerImagePath = headerImagePath
+    }
+    
   }
   
   private func decodeGameDetails(using data: Data, basedOn game: Game) {
@@ -232,25 +235,20 @@ public class GameAPIRepo: GameRepository {
     
   }
   
-  public func subscribeToGameRepoGamesLoaded(subscriber observer: GameRepositoryObserver,
-                                             subscriberID observerID: String) {
-    observers[observerID] = observer
+  public func subscribeToRepository(subscriber observer: GameRepositoryObserver) {
+    self.observer = observer
   }
   
-  public func unsubscribeFromGameRepoGamesLoaded(subscriberID observerID: String) {
-    observers.removeValue(forKey: observerID)
+  public func unsubscribeFromRepository() {
+    observer = nil
   }
   
   private func notifyGameListLoaded(gameList: [Game]) {
-    observers.forEach({ (observer) in
-      observer.value.gameListFinishedLoading(withData: gameList)
-    })
+    observer?.gameListFinishedLoading(withData: gameList)
   }
   
   private func notifyGameDetailsLoaded(withData gameList: [Game]) {
-    observers.forEach({ (observer) in
-      observer.value.gameDetailsFinishedLoading(withData: gameList)
-    })
+    observer?.gameDetailsFinishedLoading(withData: gameList)
   }
   
 }

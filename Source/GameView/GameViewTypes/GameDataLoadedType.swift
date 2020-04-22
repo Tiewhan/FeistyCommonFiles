@@ -15,4 +15,6 @@ public protocol GameDataLoadedType: AnyObject {
   
   func gameDataSuccessfullyLoaded(with data: [Game])
   
+  func headerImageLoadedForGame(at index: Int, withImage image: UIImage?)
+  
 }
