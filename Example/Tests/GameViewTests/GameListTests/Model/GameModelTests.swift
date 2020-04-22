@@ -13,14 +13,16 @@ class GameModelTests: XCTestCase {
 
   var mockGameRepo: MockGameRepo!
   var mockGameViewModel: MockGameViewModel!
+  var mockGameImageRepo: MockGameImageRepo!
   var systemUnderTest: GameModel!
   
     override func setUp() {
         
       mockGameRepo = MockGameRepo()
       mockGameViewModel = MockGameViewModel()
+      mockGameImageRepo = MockGameImageRepo()
       
-      systemUnderTest = GameModel(mockGameRepo)
+      systemUnderTest = GameModel(mockGameRepo, andImageRepo: mockGameImageRepo)
       systemUnderTest.loadData()
       
     }

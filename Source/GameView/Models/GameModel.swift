@@ -13,11 +13,15 @@ public class GameModel {
   
   private let repo: GameRepository
   public var observerID: String = "GameModelObserver"
+  private let imageRepo: GameImageRepositoryType
   
-  public init(_ repo: GameRepository) {
+  public init(_ repo: GameRepository,
+              andImageRepo imageRepo: GameImageRepositoryType) {
     self.repo = repo
+    self.imageRepo = imageRepo
     
     repo.subscribeToGameRepoGamesLoaded(subscriber: self, subscriberID: observerID)
+    imageRepo.subscribeToRepository(withSubscriber: self)
     
   }
   
@@ -78,6 +82,39 @@ extension GameModel: GameRepositoryObserver {
   public func gameDetailsFinishedLoading(withData gameList: [Game]) {
     self.gameList = gameList
     notifyAllObservers()
+    loadHeaderImages()
+  }
+  
+  private func loadHeaderImages() {
+    
+    gameList.forEach { game in
+      imageRepo.getHeaderImageFor(game: game, using: ServiceCaller())
+    }
+    
+  }
+  
+}
+
+extension GameModel: GameImageRepoObserver {
+  
+  public func imageFoundFor(game: Game) {
+    notifyImageLoadedFor(game: game)
+  }
+  
+  public func failedToLoadImageFor(game: Game) { }
+  
+  private func notifyImageLoadedFor(game: Game) {
+    
+    for index in 0..<gameList.count {
+      
+      if gameList[index].appID == game.appID {
+        observers.forEach({ (observer) in
+          observer.value.headerImageLoadedFor(game: game, at: index)
+        })
+        return
+      }
+      
+    }
   }
   
 }

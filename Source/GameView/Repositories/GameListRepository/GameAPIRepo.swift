@@ -35,6 +35,7 @@ fileprivate struct gameDetailsJSONResponseKeys {
   static let shortDescription: String = "short_description"
   static let developers: String = "developers"
   static let publishers: String = "publishers"
+  static let headerImage: String = "header_image"
   
 }
 
@@ -42,9 +43,7 @@ public class GameAPIRepo: GameRepository {
   
   private var observers: [String: GameRepositoryObserver] = [:]
   
-  public init() {
-    
-  }
+  public init() { }
   
   public func getGameList(with serviceCaller: ServiceCaller) {
 
@@ -209,6 +208,10 @@ public class GameAPIRepo: GameRepository {
     
     if let publishers = gameDetailsData[gameDetailsJSONResponseKeys.publishers] as? Array<String> {
       game.publishers = publishers
+    }
+    
+    if let headerImagePath = gameDetailsData[gameDetailsJSONResponseKeys.headerImage] as? String {
+      game.headerImagePath = headerImagePath
     }
     
   }
