@@ -18,6 +18,7 @@ public class ShoppingCartModel {
 }
 
 extension ShoppingCartModel: ShoppingCartModelType {
+  
   public func getAmountInCart() -> Int {
     return shoppingCart.shoppingList.count
   }
@@ -25,6 +26,5 @@ extension ShoppingCartModel: ShoppingCartModelType {
   public func getGame(at index: Int) -> Game {
     return shoppingCart.shoppingList[index]
   }
-  
   
 }

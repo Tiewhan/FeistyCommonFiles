@@ -56,8 +56,4 @@ public class Game: NSObject {
 
   }
 
-  public func toString() -> String {
-    return name
-  }
-  
 }

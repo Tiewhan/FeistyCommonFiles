@@ -71,21 +71,21 @@ class GameModelTests: XCTestCase {
   
   func testGameModelGamesLoadedSubscription() {
     
-    systemUnderTest.subscribeToGameModelGamesLoaded(subscriber: mockGameViewModel, subscriberID: "Mock View Model")
+    systemUnderTest.subscribeToModel(subscriber: mockGameViewModel)
     systemUnderTest.loadData()
-    
+     
     XCTAssertTrue(mockGameViewModel.gamesFinishedLoadingCalled)
     
   }
   
   func testGameModelGamesLoadedUnsubscribe() {
     
-    systemUnderTest.subscribeToGameModelGamesLoaded(subscriber: mockGameViewModel, subscriberID: "Mock View Model")
+    systemUnderTest.subscribeToModel(subscriber: mockGameViewModel)
     systemUnderTest.loadData()
     
     XCTAssertTrue(mockGameViewModel.gamesFinishedLoadingCalled)
     
-    systemUnderTest.unsubscribeFromGameModelGamesLoaded(subscriberID: "Mock View Model")
+    systemUnderTest.unsubscribeFromModel()
     systemUnderTest.loadData()
     
     XCTAssertTrue(mockGameViewModel.gamesFinishedLoadingCalled)

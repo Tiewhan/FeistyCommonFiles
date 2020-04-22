@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
                         : (NSString *) shortDescription
                         : (NSString *) developers
                         : (NSString *) publishers
-                        : (UIImage *) headerImage;
+                        : (UIImage * _Nullable)  headerImage;
 @end
 
 NS_ASSUME_NONNULL_END

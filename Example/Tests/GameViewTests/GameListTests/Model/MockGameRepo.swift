@@ -11,7 +11,7 @@ import CommonFiles
 
 class MockGameRepo {
   
-  var gamesLoadedObservers: [String: GameRepositoryObserver] = [:]
+  var observer: GameRepositoryObserver?
   var gameList: [Game] = []
   var getGameListCalled = false
   var getGameDetailsCalled = false
@@ -39,28 +39,24 @@ extension MockGameRepo: GameRepository {
   func getGameList(with serviceCaller: ServiceCaller) {
     
     getGameListCalled = true
-    gamesLoadedObservers.forEach {_, observer in
-      observer.gameListFinishedLoading(withData: gameList)
-    }
+    observer?.gameListFinishedLoading(withData: gameList)
     
   }
   
   func getGameDetails(of gameList: [Game], with serviceCaller: ServiceCaller) {
     
     getGameDetailsCalled = true
-    gamesLoadedObservers.forEach {_, observer in
-      observer.gameDetailsFinishedLoading(withData: self.gameList)
-    }
+    observer?.gameDetailsFinishedLoading(withData: self.gameList)
     
   }
   
-  func subscribeToGameRepoGamesLoaded(subscriber observer: GameRepositoryObserver, subscriberID observerID: String) {
-    gamesLoadedObservers[observerID] = observer
+  func subscribeToRepository(subscriber observer: GameRepositoryObserver) {
+    self.observer = observer
     subscriberAdded = true
   }
   
-  func unsubscribeFromGameRepoGamesLoaded(subscriberID observerID: String) {
-    gamesLoadedObservers.removeValue(forKey: observerID)
+  func unsubscribeFromRepository() {
+    observer = nil
     subscriberAdded = false
   }
   
