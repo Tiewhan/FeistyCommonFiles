@@ -7,11 +7,16 @@
 
 import Foundation
 
-private struct JSONLoginResult: Codable {
-  let can_login: Bool
-}
-
 public class LoginAPIRepo {
+
+  struct JSONLoginResult: Codable {
+    let can_login: Bool
+  }
+
+  struct DataBundleKeys {
+    static let loginUsername: String = "username"
+    static let loginPassowrd: String = "password"
+  }
   
   public weak var observer: LoginRepositoryObserver?
   
@@ -41,10 +46,10 @@ extension LoginAPIRepo: LoginRepositoryType {
     let dataBundle = DataBundle()
     
     var loginParamters: [String: Any] = [:]
-    loginParamters["username"] = username
-    loginParamters["password"] = password
+    loginParamters[DataBundleKeys.loginUsername] = username
+    loginParamters[DataBundleKeys.loginPassowrd] = password
     
-    dataBundle.extraData["parameters"] = loginParamters
+    dataBundle.extraData[ServiceCallerDataBundleKeys.postParameters] = loginParamters
     
     serviceCaller.callFailed = { _ in
       self.observer?.authenticationAttemptFinished(withResult: false)
@@ -58,7 +63,7 @@ extension LoginAPIRepo: LoginRepositoryType {
     }
     
     do {
-      try serviceCaller.makeServiceCall(with: url, and: dataBundle, usingMethod: "POST")
+      try serviceCaller.makeServiceCall(with: url, and: dataBundle, usingMethod: .post)
     } catch {
       self.observer?.authenticationAttemptFinished(withResult: false)
     }
@@ -69,7 +74,7 @@ extension LoginAPIRepo: LoginRepositoryType {
     observer = subscriber
   }
   
-  public func unsunscribeFromLoginRepositoruy() {
+  public func unsunscribeFromLoginRepository() {
     observer = nil
   }
   

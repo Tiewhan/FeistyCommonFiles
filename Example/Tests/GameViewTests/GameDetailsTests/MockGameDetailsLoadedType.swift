@@ -14,7 +14,7 @@ class MockGameDetailsLoadedType: NSObject, GameDetailsLoadedType {
   var gameDetailsFoundCalled: Bool = false
   var gameDetailsIsDefault: Bool = true
   
-  func gameDetailsFound(_ withGameName: String, _ andAppID: String, _ price: String, _ shortDescription: String, _ developers: String, _ publishers: String, _ headerImage: UIImage) {
+  func gameDetailsFound(_ withGameName: String, _ andAppID: String, _ price: String, _ shortDescription: String, _ developers: String, _ publishers: String, _ headerImage: UIImage?) {
     
     gameDetailsFoundCalled = true
     

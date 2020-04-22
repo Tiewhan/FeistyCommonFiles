@@ -7,8 +7,7 @@
 
 import Foundation
 
-public protocol GameRepositoryObserver {
-  var observerID: String { get set }
+public protocol GameRepositoryObserver: AnyObject {
   
   func gameListFinishedLoading(withData gameList: [Game])
   

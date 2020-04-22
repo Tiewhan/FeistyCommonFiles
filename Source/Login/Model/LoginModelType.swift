@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol LoginModelType: LoginModelObservable{
+public protocol LoginModelType: LoginModelObservable {
   
   func attemptLogin(with username: String, and password: String)
   
