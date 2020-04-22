@@ -9,6 +9,7 @@
 #import "GameDetailsLoadedType.h"
 @import FirebaseAnalytics;
 @class Game;
+@class GameDataTransferObject;
 
 NS_ASSUME_NONNULL_BEGIN
 

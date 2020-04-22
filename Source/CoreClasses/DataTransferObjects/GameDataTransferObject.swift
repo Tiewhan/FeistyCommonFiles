@@ -7,17 +7,35 @@
 
 import Foundation
 
-public struct GameDataTransferObject {
+public class GameDataTransferObject: NSObject {
   
-  public var appID: String
-  public var name: String
-  public var price: String
-  public var shortDescription: String
-  public var developers: Array<String> = []
-  public var publishers: Array<String> = []
-  public var headerImage: UIImage?
+  @objc public var appID: String
+  @objc public var name: String
+  @objc public var price: String
+  @objc public var shortDescription: String
+  @objc public var developers: Array<String> = []
+  @objc public var publishers: Array<String> = []
+  @objc public var headerImage: UIImage?
   
-  public static func mapToDTO(of game: Game) -> GameDataTransferObject {
+  public init(appID: String,
+              name: String,
+              price: String,
+              shortDescription: String,
+              developers: Array<String>,
+              publishers: Array<String>,
+              headerImage: UIImage?) {
+    
+    self.appID = appID
+    self.name = name
+    self.price = price
+    self.shortDescription = shortDescription
+    self.developers = developers
+    self.publishers = publishers
+    self.headerImage = headerImage
+    
+  }
+  
+  @objc public static func mapToDTO(of game: Game) -> GameDataTransferObject {
     
     let price = game.price > 0.00 ? "R\(game.price)" : "Free"
     

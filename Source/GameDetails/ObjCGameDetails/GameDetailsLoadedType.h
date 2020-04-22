@@ -6,17 +6,12 @@
 //
 
 #import <Foundation/Foundation.h>
+@class GameDataTransferObject;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol GameDetailsLoadedType <NSObject>
--(void) gameDetailsFound: (NSString *) withGameName
-                        : (NSString *) andAppID
-                        : (NSString *) price
-                        : (NSString *) shortDescription
-                        : (NSString *) developers
-                        : (NSString *) publishers
-                        : (UIImage * _Nullable)  headerImage;
+-(void) gameDetailsFound: (GameDataTransferObject *) gameDTO;
 @end
 
 NS_ASSUME_NONNULL_END
