@@ -68,6 +68,11 @@ extension GameDetailsAPIRepo: GameDetailsRepositoryType {
       
       gameList.forEach({ (game) in
         
+        let urlString = "\(SteamURLComponents.specificGameURL)\(game.appID)"
+        guard let url = URL(string: urlString) else {
+          return
+        }
+        
         dispatchGroup.enter()
         
         let dataBundle = DataBundle()
@@ -100,9 +105,6 @@ extension GameDetailsAPIRepo: GameDetailsRepositoryType {
         }
         
         // MARK: - ---------------------------
-        
-        let urlString = "\(SteamURLComponents.specificGameURL)\(game.appID)"
-        let url: URL = URL(string: urlString)!
         
         do {
           try serviceCaller.makeServiceCall(with: url, and: dataBundle)
@@ -166,9 +168,7 @@ extension GameDetailsAPIRepo: GameDetailsRepositoryType {
         self.extractGameData(detailsWrapper: mainResponseBody, game: game)
       }
 
-    } catch let err {
-      print(err)
-    }
+    } catch { }
     
   }
   
