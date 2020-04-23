@@ -50,7 +50,7 @@ extension FriendImageAPIRepo: FriendImageRepositoryType {
     }
     
     do {
-      try serviceCaller.makeServiceCall(with: url, and: dataBundle, usingMethod: "POST")
+      try serviceCaller.makeServiceCall(with: url, and: dataBundle, usingMethod: .post)
     } catch {
       return
     }

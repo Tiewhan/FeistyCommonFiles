@@ -35,11 +35,15 @@ extension LoginViewModel: LoginModelObserver {
   
   public func authenticationAttemptFinished(withResult result: Bool) {
     
+    guard let view = view else {
+      return
+    }
+    
     if result == true {
-      view?.authenticationSuccess()
+      view.authenticationSuccess()
       Analytics.logEvent(AnalyticsEventLogin, parameters: [:])
     } else {
-      view?.authenticationFailure()
+      view.authenticationFailure()
     }
     
   }

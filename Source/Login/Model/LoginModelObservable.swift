@@ -9,7 +9,7 @@ import Foundation
 
 public protocol LoginModelObservable {
   
-  var observer: LoginModelObserver? { get set }
+  var observer: LoginModelObserver? { get }
   
   func subscribeToLoginModel(withSubscriber suscriber: LoginModelObserver)
   

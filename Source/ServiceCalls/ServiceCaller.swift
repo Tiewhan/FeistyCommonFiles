@@ -22,6 +22,11 @@ public struct ServiceCallerDataBundleKeys {
   static let postParameters: String = "parameters"
 }
 
+public enum HTTPMethod: String {
+  case get = "GET"
+  case post = "POST"
+}
+
 public class ServiceCaller {
   
   public var callSucceeded: ((Data, DataBundle) -> Void)?
@@ -30,7 +35,7 @@ public class ServiceCaller {
   
   public func makeServiceCall(with url: URL,
                               and dataBundle: DataBundle,
-                              usingMethod method: String = "GET") throws {
+                              usingMethod method: HTTPMethod = .get) throws {
     
     try checkIfCallerIsSetUp()
     
@@ -68,13 +73,13 @@ public class ServiceCaller {
   }
   
   private func setUpRequest(withURL url: URL,
-                            andWithMethod method: String,
+                            andWithMethod method: HTTPMethod,
                             andWithData data: DataBundle) -> URLRequest {
     
     var request = URLRequest(url: url)
-    request.httpMethod = method
+    request.httpMethod = method.rawValue
     
-    if method == "POST" {
+    if method == .post {
       post(request: &request, andWithData: data)
     }
     

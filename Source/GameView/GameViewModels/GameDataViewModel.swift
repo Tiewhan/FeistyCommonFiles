@@ -11,7 +11,6 @@ import Foundation
 ///The class represents the data of the ViewModel and delegates work between the View and the Model
 public class GameDataViewModel {
   
-  public var observerID: String = "GameDataViewModelSubscriber"
   private weak var view: GameDataLoadedType?
   private var model: GameModelProtocol
   
@@ -19,7 +18,7 @@ public class GameDataViewModel {
     self.view = view
     self.model = model
     
-    model.subscribeToGameModelGamesLoaded(subscriber: self, subscriberID: observerID)
+    model.subscribeToModel(subscriber: self)
     model.loadData()
     
   }
@@ -70,9 +69,7 @@ extension GameDataViewModel: GameModelObserver {
   }
   
   public func gamesFinishedLoading() {
-    
     view?.gameDataSuccessfullyLoaded(with: model.gameList)
-    
   }
   
 }
