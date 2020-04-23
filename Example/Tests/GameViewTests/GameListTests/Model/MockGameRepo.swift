@@ -43,13 +43,6 @@ extension MockGameRepo: GameRepository {
     
   }
   
-  func getGameDetails(of gameList: [Game], with serviceCaller: ServiceCaller) {
-    
-    getGameDetailsCalled = true
-    observer?.gameDetailsFinishedLoading(withData: self.gameList)
-    
-  }
-  
   func subscribeToRepository(subscriber observer: GameRepositoryObserver) {
     self.observer = observer
     subscriberAdded = true

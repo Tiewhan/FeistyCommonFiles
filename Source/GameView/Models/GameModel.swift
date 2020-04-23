@@ -13,25 +13,21 @@ public class GameModel {
   
   private let repo: GameRepository
   private let imageRepo: GameImageRepositoryType
+  private let detailsRepo: GameDetailsRepositoryType
   public var gameList: [Game] = []
   public weak var observer: GameModelObserver?
   
   public init(_ repo: GameRepository,
-              andImageRepo imageRepo: GameImageRepositoryType) {
+              andImageRepo imageRepo: GameImageRepositoryType,
+              andDetailsRepo detailsRepo: GameDetailsRepositoryType) {
     self.repo = repo
     self.imageRepo = imageRepo
+    self.detailsRepo = detailsRepo
     
     repo.subscribeToRepository(subscriber: self)
     imageRepo.subscribeToRepository(withSubscriber: self)
+    detailsRepo.subscribeToRepository(subscriber: self)
     
-  }
-  
-  private func notifyAllObservers() {
-    observer?.gamesFinishedLoading()
-  }
-  
-  private func loadGameDetails(of gameList: [Game]) {
-    repo.getGameDetails(of: gameList, with: ServiceCaller())
   }
   
 }
@@ -70,21 +66,7 @@ extension GameModel: GameRepositoryObserver {
   
   public func gameListFinishedLoading(withData gameList: [Game]) {
     self.gameList = gameList
-    loadGameDetails(of: gameList)
-  }
-  
-  public func gameDetailsFinishedLoading(withData gameList: [Game]) {
-    self.gameList = gameList
-    notifyAllObservers()
-    loadHeaderImages()
-  }
-  
-  private func loadHeaderImages() {
-    
-    gameList.forEach { game in
-      imageRepo.getHeaderImageFor(game: game, using: ServiceCaller())
-    }
-    
+    detailsRepo.getGameDetails(of: gameList, with: ServiceCaller())
   }
   
 }
@@ -107,6 +89,24 @@ extension GameModel: GameImageRepoObserver {
       }
       
     }
+  }
+  
+}
+
+extension GameModel: GameDetailsRepoObserver {
+  
+  public func gameDetailsFinishedLoading(withData gameList: [Game]) {
+    self.gameList = gameList
+    observer?.gamesFinishedLoading()
+    loadHeaderImages()
+  }
+  
+  private func loadHeaderImages() {
+    
+    gameList.forEach { game in
+      imageRepo.getHeaderImageFor(game: game, using: ServiceCaller())
+    }
+    
   }
   
 }

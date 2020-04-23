@@ -11,6 +11,4 @@ public protocol GameRepositoryObserver: AnyObject {
   
   func gameListFinishedLoading(withData gameList: [Game])
   
-  func gameDetailsFinishedLoading(withData gameList: [Game])
-  
 }
