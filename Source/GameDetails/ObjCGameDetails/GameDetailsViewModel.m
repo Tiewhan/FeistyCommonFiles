@@ -34,29 +34,16 @@
                                     kFIRParameterContentType: @"game"
                       }];
   
-  NSString* gameName = self.selectedGame.name;
-  NSString* appID = self.selectedGame.appID;
-  NSString* price = [NSString stringWithFormat:@"R%.2f", self.selectedGame.price];
-  NSString* shortDescription = self.selectedGame.shortDescription;
-  NSString* developers = @"";   
-  NSString* publishers = @"";
-  UIImage* headerImage = self.selectedGame.headerImage;
+  GameDataTransferObject* gameDTO = [GameDataTransferObject alloc];
+  gameDTO.appID = self.selectedGame.appID;
+  gameDTO.name = self.selectedGame.name;
+  gameDTO.price = [NSString stringWithFormat:@"R%.2f", self.selectedGame.price];
+  gameDTO.shortDescription = self.selectedGame.shortDescription;
+  gameDTO.developers = self.selectedGame.developers;
+  gameDTO.publishers = self.selectedGame.publishers;
+  gameDTO.headerImage = self.selectedGame.headerImage;
   
-  for (id developer in self.selectedGame.developers) {
-    developers = [developers stringByAppendingString:developer];
-  }
-  
-  for (id publisher in self.selectedGame.publishers) {
-    publishers = [publishers stringByAppendingString:publisher];
-  }
-  
-  [self.view gameDetailsFound:gameName
-                             :appID
-                             :price
-                             :shortDescription
-                             :developers
-                             :publishers
-                             :headerImage];
+  [self.view gameDetailsFound:(gameDTO)];
   
 }
 
