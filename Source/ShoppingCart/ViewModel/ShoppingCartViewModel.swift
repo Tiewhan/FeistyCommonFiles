@@ -10,12 +10,25 @@ import Foundation
 public class ShoppingCartViewModel {
   
   public var model: ShoppingCartModelType?
+  public weak var view: ShoppingCartViewType?
   
   public init() { }
   
 }
 
 extension ShoppingCartViewModel: ShoppingCartViewModelType {
+  
+  public func removeItem(at index: Int) {
+    model?.removeItem(at: index)
+  }
+  
+  public func loadShoppingCart() {
+    model?.loadShoppingCart()
+  }
+  
+  public func saveShoppingCart() {
+    model?.saveShoppingCart()
+  }
   
   public func getAmountInCart() -> Int {
     return model?.getAmountInCart() ?? 0
@@ -29,6 +42,14 @@ extension ShoppingCartViewModel: ShoppingCartViewModelType {
     
     return GameDataTransferObject.mapToDTO(of: model.getGame(at: index))
     
+  }
+  
+}
+
+extension ShoppingCartViewModel: ShoppingCartModelObserver {
+  
+  public func shoppingCartGamesLoaded() {
+    view?.gamesInCartLoaded()
   }
   
 }
