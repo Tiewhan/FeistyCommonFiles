@@ -7,7 +7,7 @@
 
 import Foundation
 
-class GameDetailsAPIRepo {
+public class GameDetailsAPIRepo {
   
   struct gameDataBundleKeys {
     static let game: String = "game"
