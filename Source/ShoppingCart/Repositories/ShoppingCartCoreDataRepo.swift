@@ -57,17 +57,15 @@ extension ShoppingCartCoreDataRepo: ShoppingCartRepositoryType {
   public func loadShoppingCartData() {
     
     let request = CoreDataGame.fetchRequest() as NSFetchRequest<CoreDataGame>
+  
+    guard let list = try? context.fetch(request) else {
+      return
+    }
     
-    do {
-      
-      let list = try context.fetch(request)
-      
-      let shoppingCart = ShoppingCart()
-      shoppingCart.shoppingList = list.map { $0.mapToGame() }
-      
-      observer?.loadedData(of: shoppingCart)
-      
-    } catch { }
+    let shoppingCart = ShoppingCart()
+    shoppingCart.shoppingList = list.map { $0.mapToGame() }
+    
+    observer?.loadedData(of: shoppingCart)
     
   }
   
