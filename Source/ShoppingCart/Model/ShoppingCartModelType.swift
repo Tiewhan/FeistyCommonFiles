@@ -7,9 +7,12 @@
 
 import Foundation
 
-public protocol ShoppingCartModelType: AnyObject {
+public protocol ShoppingCartModelType: ShoppingCartModelObservable {
   
   func getAmountInCart() -> Int
   func getGame(at index: Int) -> Game
+  func saveShoppingCart()
+  func loadShoppingCart()
+  func removeItem(at index: Int)
   
 }
